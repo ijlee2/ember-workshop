@@ -1,8 +1,19 @@
 <form
+  aria-describedby={{if
+    @instructions
+    (concat this.formId "-instructions")
+  }}
+  aria-labelledby={{if @title (concat this.formId "-title")}}
   data-test-form={{or @title ""}}
   local-class="form"
   {{on "submit" this.submitForm}}
 >
+  <Ui::Form::Information
+    @formId={{this.formId}}
+    @instructions={{@instructions}}
+    @title={{@title}}
+  />
+
   {{yield}}
 
   <div local-class="actions">

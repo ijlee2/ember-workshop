@@ -1,4 +1,4 @@
-import { click, render } from '@ember/test-helpers';
+import { click, find, render } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupIntl } from 'ember-intl/test-support';
@@ -28,9 +28,17 @@ module('Integration | Component | ui/form', function (hooks) {
       />
     `);
 
+    const titleId = find('[data-test-title]').getAttribute('id');
+    const instructionsId = find('[data-test-instructions]').getAttribute('id');
+
     assert
       .dom('[data-test-form="Contact me"]')
-      .exists({ count: 1 }, 'We see the form.');
+      .hasAria(
+        'describedby',
+        instructionsId,
+        'We see the correct aria-describedby.',
+      )
+      .hasAria('labelledby', titleId, 'We see the correct aria-labelledby.');
 
     assert.dom('[data-test-field]').exists({ count: 0 }, 'We see 0 fields.');
 
