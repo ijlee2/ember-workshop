@@ -14,7 +14,21 @@
     @title={{@title}}
   />
 
-  {{yield}}
+  <ContainerQuery
+    @features={{hash wide=(width min=480)}}
+    as |CQ|
+  >
+    {{yield
+      (hash
+        Input=(component
+          "ui/form/input"
+          changeset=this.changeset
+          isWide=CQ.features.wide
+          onUpdate=this.updateChangeset
+        )
+      )
+    }}
+  </ContainerQuery>
 
   <div local-class="actions">
     <button
