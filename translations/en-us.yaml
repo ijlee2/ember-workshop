@@ -1,0 +1,4 @@
+routes:
+  application:
+    app-name: Ember Workshop
+    copyright: 'Created by <a href="https://www.linkedin.com/in/ijlee2/" rel="noopener noreferrer" target="_blank">Isaac J. Lee</a> © 2022'
