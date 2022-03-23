@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ember Workshop</title>
+    <meta name="description" content="A demo app to illustrate core and latest concepts in Ember.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    {{content-for "head"}}
+
+    <link rel="icon" type="image/png" sizes="256x256" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="/assets/favicon.png">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ember-workshop.css">
+
+    {{content-for "head-footer"}}
+  </head>
+  <body>
+    {{content-for "body"}}
+
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/ember-workshop.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>
