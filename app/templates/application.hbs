@@ -7,6 +7,18 @@
       @skipText={{t "routes.application.skip-text"}}
       @skipTo="#main-content"
     />
+
+    <NavigationMenu
+      @menuItems={{array
+        (hash
+          label=(t
+            "routes.application.navigation-menu.routes.index"
+          )
+          route="index"
+        )
+      }}
+      @name={{t "routes.application.navigation-menu.name"}}
+    />
   </header>
 
   <main local-class="main">
