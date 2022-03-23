@@ -13,4 +13,11 @@ export default class UiFormComponent extends Component {
 
     this.args.onSubmit(this.changeset);
   }
+
+  @action updateChangeset({ key, value }) {
+    this.changeset = {
+      ...this.changeset,
+      [key]: value,
+    };
+  }
 }
