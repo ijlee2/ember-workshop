@@ -1,0 +1,18 @@
+{{page-title (t "routes.application.app-name")}}
+
+<div local-class="application">
+  <header local-class="header">
+  </header>
+
+  <main local-class="main">
+    <div local-class="center">
+      {{outlet}}
+    </div>
+  </main>
+
+  <footer local-class="footer">
+    <span local-class="copyright">
+      {{t "routes.application.copyright" htmlSafe=true}}
+    </span>
+  </footer>
+</div>
