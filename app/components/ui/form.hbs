@@ -1,0 +1,17 @@
+<form
+  data-test-form={{or @title ""}}
+  local-class="form"
+  {{on "submit" this.submitForm}}
+>
+  {{yield}}
+
+  <div local-class="actions">
+    <button
+      data-test-button="Submit"
+      local-class="submit-button"
+      type="submit"
+    >
+      {{t "components.ui.form.submit"}}
+    </button>
+  </div>
+</form>
