@@ -19,12 +19,15 @@
       data-test-field={{@label}}
       disabled={{@isDisabled}}
       id={{f.inputId}}
+      max={{@maxValue}}
+      min={{@minValue}}
       local-class="input
         {{if (or @isDisabled @isReadOnly) 'is-disabled'}}
       "
       placeholder={{@placeholder}}
       readonly={{@isReadOnly}}
       required={{@isRequired}}
+      step={{or @step "any"}}
       type={{this.type}}
       value={{this.value}}
       {{on "input" this.updateValue}}

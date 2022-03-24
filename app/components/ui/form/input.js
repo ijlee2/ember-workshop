@@ -27,8 +27,20 @@ export default class UiFormInputComponent extends Component {
   }
 
   @action updateValue(event) {
-    const { key, onUpdate } = this.args;
+    const { key, onUpdate, type } = this.args;
     const { value } = event.target;
+
+    if (type === 'number') {
+      const valueAsNumber = Number.parseFloat(value);
+
+      if (Number.isNaN(valueAsNumber)) {
+        onUpdate({ key, value: undefined });
+        return;
+      }
+
+      onUpdate({ key, value: valueAsNumber });
+      return;
+    }
 
     onUpdate({ key, value });
   }

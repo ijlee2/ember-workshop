@@ -54,5 +54,20 @@
         }}
       />
     </div>
+
+    <div local-class="field">
+      <F.Input
+        @key="donation"
+        @label={{t
+          "routes.form.contact-me-form.fields.donation.label"
+        }}
+        @minValue={{0}}
+        @placeholder={{t
+          "routes.form.contact-me-form.fields.donation.placeholder"
+        }}
+        @step={{10}}
+        @type="number"
+      />
+    </div>
   </Ui::Form>
 </Ui::Page>
