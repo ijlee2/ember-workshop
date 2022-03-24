@@ -6,6 +6,7 @@
   aria-labelledby={{if @title (concat this.formId "-title")}}
   data-test-form={{or @title ""}}
   local-class="form"
+  {{autofocus}}
   {{on "submit" this.submitForm}}
 >
   <Ui::Form::Information
