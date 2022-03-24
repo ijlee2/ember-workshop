@@ -56,15 +56,16 @@
     </div>
 
     <div local-class="field">
-      <F.Input
+      <F.Number
         @key="donation"
         @label={{t
           "routes.form.contact-me-form.fields.donation.label"
         }}
+        @minValue={{0}}
         @placeholder={{t
           "routes.form.contact-me-form.fields.donation.placeholder"
         }}
-        @type="number"
+        @step={{10}}
       />
     </div>
   </Ui::Form>

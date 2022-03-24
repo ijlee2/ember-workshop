@@ -1,8 +1,7 @@
-import { assert } from '@ember/debug';
 import { action, get } from '@ember/object';
 import Component from '@glimmer/component';
 
-export default class UiFormInputComponent extends Component {
+export default class UiFormNumberComponent extends Component {
   get errorMessage() {
     const { isRequired } = this.args;
 
@@ -17,17 +16,6 @@ export default class UiFormInputComponent extends Component {
     return undefined;
   }
 
-  get type() {
-    const { type } = this.args;
-
-    assert(
-      'To render a number input, please use <Ui::Form::Number> instead.',
-      type !== 'number'
-    );
-
-    return this.args.type ?? 'text';
-  }
-
   get value() {
     const { changeset, key } = this.args;
 
@@ -38,6 +26,13 @@ export default class UiFormInputComponent extends Component {
     const { key, onUpdate } = this.args;
     const { value } = event.target;
 
-    onUpdate({ key, value });
+    const valueAsNumber = Number.parseFloat(value);
+
+    if (Number.isNaN(valueAsNumber)) {
+      onUpdate({ key, value: undefined });
+      return;
+    }
+
+    onUpdate({ key, value: valueAsNumber });
   }
 }
