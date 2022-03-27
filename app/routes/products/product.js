@@ -4,12 +4,18 @@ import { inject as service } from '@ember/service';
 
 export default class ProductsProductRoute extends Route {
   @service router;
-  @service store;
 
   model(params) {
     const { id } = params;
+    const products = this.modelFor('products');
 
-    return this.store.findRecord('product', id);
+    const product = products.find((product) => product.id === id);
+
+    if (!product) {
+      throw new Error(`Could not find the product with ID ${id}.`);
+    }
+
+    return product;
   }
 
   @action error(/* error, transition */) {
