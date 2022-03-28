@@ -8,11 +8,10 @@
 
     <div local-class="list">
       {{#each @model as |product|}}
-        <div>
-          {{product.id}}
-          -
-          {{product.name}}
-        </div>
+        <Products::Product::Card
+          @product={{product}}
+          @redirectTo="products.product"
+        />
       {{else}}
         <p>
           {{t "routes.products.no-products-found"}}
