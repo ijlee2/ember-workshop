@@ -11,7 +11,7 @@
           @changeset={{hash name=this.name}}
           @key="name"
           @label={{t "routes.products.filter-by.name.label"}}
-          @onUpdate={{this.updateQueryParameters}}
+          @onUpdate={{perform this.updateQueryParameters}}
           @placeholder={{t
             "routes.products.filter-by.name.placeholder"
           }}
