@@ -1,0 +1,51 @@
+<ContainerQuery
+  @features={{hash wide=(width min=320)}}
+  @tagName="article"
+  data-test-product-card
+  local-class="container"
+>
+  <header local-class="header">
+    <h2 data-test-field="Name" local-class="name">
+      {{@product.name}}
+    </h2>
+  </header>
+
+  <div local-class="image-container">
+    <Products::Product::Image @src={{@product.imageUrl}} />
+  </div>
+
+  <div local-class="body">
+    <p
+      data-test-field="Short Description"
+      local-class="description"
+    >
+      {{@product.shortDescription}}
+    </p>
+
+    {{#if @product.price}}
+      <p data-test-field="Price" local-class="price">
+        {{format-number
+          @product.price
+          currency="USD"
+          minimumFractionDigits=0
+          style="currency"
+        }}
+      </p>
+    {{/if}}
+  </div>
+
+  <div local-class="actions">
+    <LinkTo
+      @model={{@product.id}}
+      @route={{@redirectTo}}
+      aria-label={{t
+        "components.products.product.card.learn-more.aria-label"
+        productName=@product.name
+      }}
+      data-test-link="Learn More"
+      local-class="link"
+    >
+      {{t "components.products.product.card.learn-more.label"}}
+    </LinkTo>
+  </div>
+</ContainerQuery>
