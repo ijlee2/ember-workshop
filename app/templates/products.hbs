@@ -1,7 +1,13 @@
 {{page-title (t "routes.products.title")}}
 
 <Ui::Page @title={{t "routes.products.title"}}>
-  <div local-class="products">
+  <div
+    local-class={{if
+      this.isPartOfNestProductDetailsExperiment
+      "products-with-details"
+      "products"
+    }}
+  >
     <div
       local-class="filters"
       {{will-destroy this.resetQueryParameters}}
@@ -23,7 +29,11 @@
       {{#each @model as |product|}}
         <Products::Product::Card
           @product={{product}}
-          @redirectTo="product-details"
+          @redirectTo={{if
+            this.isPartOfNestProductDetailsExperiment
+            "products.product"
+            "product-details"
+          }}
         />
       {{else}}
         <p>
