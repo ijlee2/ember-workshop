@@ -42,3 +42,4 @@ function setupTest(hooks, options) {
 export { setupApplicationTest, setupRenderingTest, setupTest };
 
 export * from 'ember-workshop/tests/helpers/services/config';
+export * from 'ember-workshop/tests/helpers/services/experiments';
