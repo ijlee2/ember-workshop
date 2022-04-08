@@ -6,10 +6,15 @@ import { restartableTask, timeout } from 'ember-concurrency';
 
 export default class ProductsController extends Controller {
   @service config;
+  @service experiments;
 
   queryParams = ['name'];
 
   @tracked name;
+
+  get isPartOfNestProductDetailsExperiment() {
+    return this.experiments.getVariant('nest-product-details') === 'v1';
+  }
 
   @action resetQueryParameters() {
     this.name = null;
