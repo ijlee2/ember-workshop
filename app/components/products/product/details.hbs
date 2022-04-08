@@ -1,0 +1,72 @@
+<article data-test-product-details local-class="container">
+  <header local-class="header">
+    <h2 data-test-field="Name" local-class="name">
+      {{@product.name}}
+    </h2>
+  </header>
+
+  <div local-class="image-container">
+    <Products::Product::Image @src={{@product.imageUrl}} />
+  </div>
+
+  <div local-class="body">
+    <section local-class="field">
+      <h3 local-class="label">
+        {{t "components.products.product.details.description"}}
+      </h3>
+
+      <p data-test-field="Description">
+        {{@product.description}}
+      </p>
+    </section>
+
+    {{#if @product.price}}
+      <section local-class="field">
+        <h3 local-class="label">
+          {{t "components.products.product.details.price"}}
+        </h3>
+
+        <p data-test-field="Price">
+          {{format-number
+            @product.price
+            currency="USD"
+            minimumFractionDigits=0
+            style="currency"
+          }}
+        </p>
+      </section>
+    {{/if}}
+
+    <section local-class="field">
+      <h3 local-class="label">
+        {{t "components.products.product.details.rating"}}
+      </h3>
+
+      <p data-test-field="Rating">
+        {{t
+          "components.products.product.details.rating-value"
+          productRating=@product.rating
+        }}
+      </p>
+    </section>
+
+    <section local-class="field">
+      <h3 local-class="label">
+        {{t "components.products.product.details.seller"}}
+      </h3>
+
+      <p data-test-field="Seller">{{@product.seller}}</p>
+    </section>
+  </div>
+
+  <div local-class="actions">
+    <button
+      data-test-button="Add to Cart"
+      local-class="button"
+      type="button"
+      {{on "click" (fn this.addProductToCart @product)}}
+    >
+      {{t "components.products.product.details.add-to-cart"}}
+    </button>
+  </div>
+</article>
