@@ -3,8 +3,22 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
 export default class ProductDetailsRoute extends Route {
+  @service experiments;
   @service router;
   @service store;
+
+  get isPartOfNestProductDetailsExperiment() {
+    return this.experiments.getVariant('nest-product-details') === 'v1';
+  }
+
+  beforeModel(transition) {
+    const { id } = transition.to.params;
+
+    if (this.isPartOfNestProductDetailsExperiment) {
+      this.router.replaceWith('products.product', id);
+      return;
+    }
+  }
 
   model(params) {
     const { id } = params;
