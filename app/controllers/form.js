@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
+import { dropTask } from 'ember-concurrency';
 import { generateBody } from 'ember-workshop/utils/fetch';
 import fetch from 'fetch';
 
@@ -14,11 +14,11 @@ export default class FormController extends Controller {
     };
   }
 
-  @action async submitForm(data) {
+  @dropTask *submitForm(data) {
     try {
       const body = generateBody(data);
 
-      await fetch('/contact-me', {
+      yield fetch('/contact-me', {
         body,
         method: 'POST',
       });
