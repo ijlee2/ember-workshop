@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { generateBody } from 'ember-workshop/utils/fetch';
+import fetch from 'fetch';
 
 export default class FormController extends Controller {
   get initialData() {
@@ -12,7 +14,16 @@ export default class FormController extends Controller {
     };
   }
 
-  @action submitForm(data) {
-    console.table(data);
+  @action async submitForm(data) {
+    try {
+      const body = generateBody(data);
+
+      await fetch('/contact-me', {
+        body,
+        method: 'POST',
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 }
