@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
+import { dropTask } from 'ember-concurrency';
 import { generateBody } from 'ember-workshop/utils/fetch';
 import fetch from 'fetch';
 
@@ -14,7 +14,7 @@ export default class FormController extends Controller {
     };
   }
 
-  @action async submitForm(data) {
+  submitForm = dropTask(async (data) => {
     try {
       const body = generateBody(data);
 
@@ -25,5 +25,5 @@ export default class FormController extends Controller {
     } catch (e) {
       throw new Error(e);
     }
-  }
+  });
 }
