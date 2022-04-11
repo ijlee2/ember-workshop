@@ -1,4 +1,5 @@
-import { render } from '@ember/test-helpers';
+import { set } from '@ember/object';
+import { fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -49,6 +50,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
     await render(hbs`
       <Ui::Form::Number
         @changeset={{this.changeset}}
+        @isDisabled={{true}}
         @key="donation"
         @label="Donation amount ($)"
         @minValue={{0}}
@@ -56,17 +58,16 @@ module('Integration | Component | ui/form/number', function (hooks) {
       />
     `);
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert
+      .dom('[data-test-field="Donation amount ($)"]')
+      .isDisabled('The input is disabled.');
   });
 
   test('We can pass @isReadOnly to display the value', async function (assert) {
     await render(hbs`
       <Ui::Form::Number
         @changeset={{this.changeset}}
+        @isReadOnly={{true}}
         @key="donation"
         @label="Donation amount ($)"
         @minValue={{0}}
@@ -74,17 +75,17 @@ module('Integration | Component | ui/form/number', function (hooks) {
       />
     `);
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert
+      .dom('[data-test-field="Donation amount ($)"]')
+      .hasAttribute('readonly', '', 'We see the readonly attribute.')
+      .hasValue('1000', 'We see the correct value.');
   });
 
   test('We can pass @isRequired to require a value', async function (assert) {
     await render(hbs`
       <Ui::Form::Number
         @changeset={{this.changeset}}
+        @isRequired={{true}}
         @key="donation"
         @label="Donation amount ($)"
         @minValue={{0}}
@@ -92,28 +93,69 @@ module('Integration | Component | ui/form/number', function (hooks) {
       />
     `);
 
-    /*
-      TODO: Write tests
-    */
+    assert
+      .dom('[data-test-label]')
+      .hasText(
+        'Donation amount ($) *',
+        'The label shows that the field is required.',
+      );
 
-    assert.ok(true);
+    assert
+      .dom('[data-test-field="Donation amount ($)"]')
+      .isRequired('The input is required.');
   });
 
   test('We can pass @onUpdate to get the updated value', async function (assert) {
+    let expectedValue = undefined;
+
+    this.updateChangeset = ({ key, value }) => {
+      assert.step('onUpdate');
+
+      assert.strictEqual(
+        value,
+        expectedValue,
+        'The changeset has the correct value.',
+      );
+
+      set(this.changeset, key, value);
+    };
+
     await render(hbs`
       <Ui::Form::Number
         @changeset={{this.changeset}}
+        @isRequired={{true}}
         @key="donation"
         @label="Donation amount ($)"
         @minValue={{0}}
+        @onUpdate={{this.updateChangeset}}
         @placeholder="100"
       />
     `);
 
-    /*
-      TODO: Write tests
-    */
+    // Update the value
+    await fillIn('[data-test-field="Donation amount ($)"]', '');
 
-    assert.ok(true);
+    assert
+      .dom('[data-test-field="Donation amount ($)"]')
+      .hasValue('', 'We see the correct value.');
+
+    assert
+      .dom('[data-test-feedback]')
+      .hasText('Please provide a value.', 'We see an error message.');
+
+    // Update the value again
+    expectedValue = 10000;
+
+    await fillIn('[data-test-field="Donation amount ($)"]', '10000');
+
+    assert
+      .dom('[data-test-field="Donation amount ($)"]')
+      .hasValue('10000', 'We see the correct value.');
+
+    assert
+      .dom('[data-test-feedback]')
+      .doesNotExist('We should not see an error message.');
+
+    assert.verifySteps(['onUpdate', 'onUpdate']);
   });
 });
