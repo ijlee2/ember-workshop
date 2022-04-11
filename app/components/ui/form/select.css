@@ -1,0 +1,33 @@
+.select-container {
+  display: grid;
+  grid-column-gap: 0.75rem;
+  grid-template-areas: "select clear-button";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+}
+
+.select {
+  border: 0.125rem solid #ffd54f;
+  grid-area: select;
+  padding: 0.125rem 0.25rem;
+  width: 100%;
+}
+
+.select:focus {
+  background-color: #ffecb3;
+  outline: 0;
+}
+
+.select:not(:focus) {
+  border-color: transparent;
+}
+
+.select.is-disabled {
+  background-color: #b2c9d4;
+  color: #546e7a;
+  cursor: not-allowed;
+}
+
+.clear-button {
+  grid-area: clear-button;
+}
