@@ -7,17 +7,41 @@ import { restartableTask, timeout } from 'ember-concurrency';
 export default class ProductsController extends Controller {
   @service config;
   @service experiments;
+  @service intl;
 
-  queryParams = ['name'];
+  queryParams = ['name', 'sortBy'];
 
   @tracked name;
+  @tracked sortBy;
 
   get isPartOfNestProductDetailsExperiment() {
     return this.experiments.getVariant('nest-product-details') === 'v1';
   }
 
+  get optionsForSorting() {
+    return [
+      {
+        label: this.intl.t('routes.products.sort-by.name-ascending'),
+        value: 'name:asc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.name-descending'),
+        value: 'name:desc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.price-ascending'),
+        value: 'price:asc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.price-descending'),
+        value: 'price:desc',
+      },
+    ];
+  }
+
   @action resetQueryParameters() {
     this.name = null;
+    this.sortBy = null;
   }
 
   updateQueryParameters = restartableTask(async ({ key, value }) => {

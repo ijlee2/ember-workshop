@@ -8,6 +8,9 @@ export default class ProductsRoute extends Route {
     name: {
       refreshModel: true,
     },
+    sortBy: {
+      refreshModel: false,
+    },
   };
 
   model(params) {
