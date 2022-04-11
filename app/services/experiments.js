@@ -1,5 +1,5 @@
 import { assert } from '@ember/debug';
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 
 export default class ExperimentsService extends Service {
   @service config;
