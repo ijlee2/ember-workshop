@@ -1,19 +1,18 @@
 import { action, get } from '@ember/object';
 import Component from '@glimmer/component';
+import { generateErrorMessage } from 'ember-workshop/utils/components/form';
 
 export default class UiFormCheckboxComponent extends Component {
   get errorMessage() {
     const { isRequired } = this.args;
 
-    if (!isRequired) {
-      return undefined;
-    }
-
-    if (!this.isChecked) {
-      return 'Please select the checkbox.';
-    }
-
-    return undefined;
+    return generateErrorMessage({
+      options: {
+        isRequired,
+      },
+      value: this.isChecked,
+      valueType: 'boolean',
+    });
   }
 
   get isChecked() {
