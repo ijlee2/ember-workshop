@@ -43,5 +43,6 @@ export { setupApplicationTest, setupRenderingTest, setupTest };
 
 export * from 'ember-workshop/tests/helpers/components/ui/form';
 export * from 'ember-workshop/tests/helpers/routes/form';
+export * from 'ember-workshop/tests/helpers/routes/products';
 export * from 'ember-workshop/tests/helpers/services/config';
 export * from 'ember-workshop/tests/helpers/services/experiments';
