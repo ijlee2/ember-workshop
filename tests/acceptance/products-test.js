@@ -4,11 +4,16 @@ import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupIntl } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import { setupApplicationTest } from 'ember-qunit';
-import { assignVariants, selectByLabel } from 'ember-workshop/tests/helpers';
+import {
+  assignVariants,
+  selectByLabel,
+  setupCustomAssertionsForProducts,
+} from 'ember-workshop/tests/helpers';
 import { module, test } from 'qunit';
 
 module('Acceptance | products', function (hooks) {
   setupApplicationTest(hooks);
+  setupCustomAssertionsForProducts(hooks);
   setupIntl(hooks);
   setupMirage(hooks);
 
@@ -76,24 +81,11 @@ module('Acceptance | products', function (hooks) {
         .dom('[data-test-field="Sort by"]')
         .exists({ count: 1 }, 'The user sees the sort by field.');
 
-      const products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3, 'The user sees 3 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 1st product.',
-        );
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Stickers', 'The user sees the correct 2nd product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake', 'The user sees the correct 3rd product.');
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Ember.js Stickers',
+        'Black Forest Cake',
+      ]);
     });
 
     test('A user can filter and sort products', async function (assert) {
@@ -106,20 +98,10 @@ module('Acceptance | products', function (hooks) {
         'The user is on the products route.',
       );
 
-      let products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 2, 'The user sees 2 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 1st product.',
-        );
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Black Forest Cake', 'The user sees the correct 2nd product.');
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Black Forest Cake',
+      ]);
 
       await selectByLabel('[data-test-field="Sort by"]', 'Name: A to Z');
 
@@ -129,20 +111,10 @@ module('Acceptance | products', function (hooks) {
         'The user is on the products route.',
       );
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 2, 'The user sees 2 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Black Forest Cake', 'The user sees the correct 1st product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 2nd product.',
-        );
+      assert.areProductsCorrect([
+        'Black Forest Cake',
+        'Vanilla Ice Cream Cake',
+      ]);
 
       await fillIn('[data-test-field="Filter by name"]', '');
 
@@ -152,24 +124,11 @@ module('Acceptance | products', function (hooks) {
         'The user is on the products route.',
       );
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3, 'The user sees 3 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Black Forest Cake', 'The user sees the correct 1st product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Stickers', 'The user sees the correct 2nd product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 3rd product.',
-        );
+      assert.areProductsCorrect([
+        'Black Forest Cake',
+        'Ember.js Stickers',
+        'Vanilla Ice Cream Cake',
+      ]);
 
       await click('[data-test-button="Clear"]');
 
@@ -179,30 +138,17 @@ module('Acceptance | products', function (hooks) {
         'The user is on the products route.',
       );
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3, 'The user sees 3 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 1st product.',
-        );
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Stickers', 'The user sees the correct 2nd product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake', 'The user sees the correct 3rd product.');
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Ember.js Stickers',
+        'Black Forest Cake',
+      ]);
     });
 
     test('A user can check a product', async function (assert) {
       await visit('/products');
 
-      let products = findAll('[data-test-product-card]');
+      const products = findAll('[data-test-product-card]');
 
       await click(products[0].querySelector('[data-test-link="Learn More"]'));
 
@@ -243,24 +189,11 @@ module('Acceptance | products', function (hooks) {
         'The user is on the products route.',
       );
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3, 'The user sees 3 products.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText(
-          'Vanilla Ice Cream Cake',
-          'The user sees the correct 1st product.',
-        );
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Stickers', 'The user sees the correct 2nd product.');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake', 'The user sees the correct 3rd product.');
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Ember.js Stickers',
+        'Black Forest Cake',
+      ]);
     });
   });
 });
