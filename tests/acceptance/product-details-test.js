@@ -72,28 +72,13 @@ module('Acceptance | product details', function (hooks) {
         'The user is on the product-details route.',
       );
 
-      assert
-        .dom('[data-test-field="Name"]')
-        .hasText('Vanilla Ice Cream Cake', 'The user sees the correct name.');
-
-      assert
-        .dom('[data-test-field="Description"]')
-        .hasText(
-          'Made with organic herbs',
-          'The user sees the correct description.',
-        );
-
-      assert
-        .dom('[data-test-field="Price"]')
-        .hasText('$40', 'The user sees the correct price.');
-
-      assert
-        .dom('[data-test-field="Rating"]')
-        .hasText('4.5 out of 5 stars', 'The user sees the correct rating.');
-
-      assert
-        .dom('[data-test-field="Seller"]')
-        .hasText("Amy's", 'The user sees the correct seller.');
+      assert.areProductDetailsCorrect({
+        description: 'Made with organic herbs',
+        name: 'Vanilla Ice Cream Cake',
+        price: '$40',
+        rating: '4.5 out of 5 stars',
+        seller: "Amy's",
+      });
     });
 
     test('A user can check another product', async function (assert) {
@@ -122,28 +107,13 @@ module('Acceptance | product details', function (hooks) {
         'The user is on the product-details route.',
       );
 
-      assert
-        .dom('[data-test-field="Name"]')
-        .hasText('Black Forest Cake', 'The user sees the correct name.');
-
-      assert
-        .dom('[data-test-field="Description"]')
-        .hasText(
-          'A chocolate sponge cake with a rich cherry filling',
-          'The user sees the correct description.',
-        );
-
-      assert
-        .dom('[data-test-field="Price"]')
-        .hasText('$70', 'The user sees the correct price.');
-
-      assert
-        .dom('[data-test-field="Rating"]')
-        .hasText('5 out of 5 stars', 'The user sees the correct rating.');
-
-      assert
-        .dom('[data-test-field="Seller"]')
-        .hasText('The local Konditorei', 'The user sees the correct seller.');
+      assert.areProductDetailsCorrect({
+        description: 'A chocolate sponge cake with a rich cherry filling',
+        name: 'Black Forest Cake',
+        price: '$70',
+        rating: '5 out of 5 stars',
+        seller: 'The local Konditorei',
+      });
     });
 
     test('When a user checks a product that does not exist, we redirect them to the products route', async function (assert) {

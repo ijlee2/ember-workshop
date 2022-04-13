@@ -2,11 +2,15 @@ import { currentURL, visit } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
-import { assignVariants } from 'ember-workshop/tests/helpers';
+import {
+  assignVariants,
+  setupCustomAssertionsForProducts,
+} from 'ember-workshop/tests/helpers';
 import { module, test } from 'qunit';
 
 module('Acceptance | products/product', function (hooks) {
   setupApplicationTest(hooks);
+  setupCustomAssertionsForProducts(hooks);
   setupIntl(hooks);
   setupMirage(hooks);
 
@@ -55,28 +59,13 @@ module('Acceptance | products/product', function (hooks) {
         'We redirect the user to the product-details route.',
       );
 
-      assert
-        .dom('[data-test-field="Name"]')
-        .hasText('Vanilla Ice Cream Cake', 'The user sees the correct name.');
-
-      assert
-        .dom('[data-test-field="Description"]')
-        .hasText(
-          'Made with organic herbs',
-          'The user sees the correct description.',
-        );
-
-      assert
-        .dom('[data-test-field="Price"]')
-        .hasText('$40', 'The user sees the correct price.');
-
-      assert
-        .dom('[data-test-field="Rating"]')
-        .hasText('4.5 out of 5 stars', 'The user sees the correct rating.');
-
-      assert
-        .dom('[data-test-field="Seller"]')
-        .hasText("Amy's", 'The user sees the correct seller.');
+      assert.areProductDetailsCorrect({
+        description: 'Made with organic herbs',
+        name: 'Vanilla Ice Cream Cake',
+        price: '$40',
+        rating: '4.5 out of 5 stars',
+        seller: "Amy's",
+      });
     });
   });
 });
