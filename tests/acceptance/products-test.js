@@ -177,4 +177,119 @@ module('Acceptance | products', function (hooks) {
       ]);
     });
   });
+
+  module('nest-product-details, v1', function (nestedHooks) {
+    nestedHooks.beforeEach(function () {
+      assignVariants({
+        'nest-product-details': 'v1',
+      });
+    });
+
+    test('A user can visit the products route', async function (assert) {
+      await visit('/products');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products',
+        'The user is on the products route.',
+      );
+
+      assert
+        .dom('[data-test-field="Filter by name"]')
+        .exists({ count: 1 }, 'The user sees the filter by name field.');
+
+      assert
+        .dom('[data-test-field="Sort by"]')
+        .exists({ count: 1 }, 'The user sees the sort by field.');
+
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Ember.js Stickers',
+        'Black Forest Cake',
+      ]);
+    });
+
+    test('A user can filter and sort products', async function (assert) {
+      await visit('/products');
+      await fillIn('[data-test-field="Filter by name"]', 'cake');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products?name=cake',
+        'The user is on the products route.',
+      );
+
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Black Forest Cake',
+      ]);
+
+      await selectByLabel('[data-test-field="Sort by"]', 'Name: A to Z');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products?name=cake&sortBy=name%3Aasc',
+        'The user is on the products route.',
+      );
+
+      assert.areProductsCorrect([
+        'Black Forest Cake',
+        'Vanilla Ice Cream Cake',
+      ]);
+
+      await fillIn('[data-test-field="Filter by name"]', '');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products?sortBy=name%3Aasc',
+        'The user is on the products route.',
+      );
+
+      assert.areProductsCorrect([
+        'Black Forest Cake',
+        'Ember.js Stickers',
+        'Vanilla Ice Cream Cake',
+      ]);
+
+      await click('[data-test-button="Clear"]');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products',
+        'The user is on the products route.',
+      );
+
+      assert.areProductsCorrect([
+        'Vanilla Ice Cream Cake',
+        'Ember.js Stickers',
+        'Black Forest Cake',
+      ]);
+    });
+
+    test('A user can check a product', async function (assert) {
+      await visit('/products');
+
+      const products = findAll('[data-test-product-card]');
+
+      await click(products[0].querySelector('[data-test-link="Learn More"]'));
+
+      assert.strictEqual(
+        currentURL(),
+        '/products/1',
+        'The user is on the products.product route.',
+      );
+
+      assert.areProductDetailsCorrect({
+        description: 'Made with organic herbs',
+        name: 'Vanilla Ice Cream Cake',
+        price: '$40',
+        rating: '4.5 out of 5 stars',
+        seller: "Amy's",
+      });
+
+      assert
+        .dom('[data-test-link="Back"]')
+        .doesNotExist('The user should not see the back link.');
+    });
+  });
 });
