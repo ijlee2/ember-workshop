@@ -2,6 +2,11 @@
 
 <div local-class="application">
   <header local-class="header">
+    <NavigationNarrator
+      @navigationText={{t "routes.application.navigation-text"}}
+      @skipText={{t "routes.application.skip-text"}}
+      @skipTo="#main-content"
+    />
   </header>
 
   <main local-class="main">
