@@ -1,11 +1,28 @@
 import { assert } from '@ember/debug';
 import Service, { service } from '@ember/service';
+// eslint-disable-next-line import/named
+import { cached } from '@glimmer/tracking';
 
 export default class ExperimentsService extends Service {
   @service config;
 
-  get pdfs() {
-    return this.config.getValue('experiments') ?? {};
+  @cached get cdfs() {
+    const experiments = this.config.getValue('experiments') ?? {};
+    const cdfs = new Map();
+
+    for (const [experimentName, pdf] of Object.entries(experiments)) {
+      const cdf = new Map();
+      let total = 0;
+
+      for (const [variant, probability] of Object.entries(pdf)) {
+        total += probability;
+        cdf.set(variant, total);
+      }
+
+      cdfs.set(experimentName, cdf);
+    }
+
+    return cdfs;
   }
 
   constructor() {
@@ -15,11 +32,9 @@ export default class ExperimentsService extends Service {
   }
 
   getVariant(experimentName) {
-    const pdf = this.pdfs[experimentName];
-
     assert(
       `${experimentName} is an unknown experiment. Please define the experiment in the config service.`,
-      typeof pdf === 'object',
+      this.cdfs.has(experimentName),
     );
 
     const cachedVariant = this.cachedVariants[experimentName];
@@ -34,27 +49,21 @@ export default class ExperimentsService extends Service {
   }
 
   setVariant(experimentName, variant) {
-    const pdf = this.pdfs[experimentName];
-    const variants = Object.keys(pdf);
+    const cdf = this.cdfs.get(experimentName);
 
     assert(
       `${variant} is an unknown variant for ${experimentName}. Please check for typos.`,
-      variants.includes(variant),
+      cdf.has(variant),
     );
 
     this.cachedVariants[experimentName] = variant;
   }
 
   #determineVariant(experimentName) {
-    const pdf = this.pdfs[experimentName];
-    const variants = Object.keys(pdf);
-
-    let total = 0;
+    const cdf = this.cdfs.get(experimentName);
     const sample = Math.random();
 
-    for (let variant of variants) {
-      total += pdf[variant];
-
+    for (const [variant, total] of cdf.entries()) {
       if (sample < total) {
         this.setVariant(experimentName, variant);
         break;
@@ -64,9 +73,8 @@ export default class ExperimentsService extends Service {
 
   #initializeVariants() {
     const cachedVariants = {};
-    const experimentNames = Object.keys(this.pdfs);
 
-    experimentNames.forEach((experimentName) => {
+    this.cdfs.forEach((cdf, experimentName) => {
       cachedVariants[experimentName] = undefined;
     });
 
