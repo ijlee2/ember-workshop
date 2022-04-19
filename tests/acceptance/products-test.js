@@ -1,12 +1,10 @@
 import { click, currentURL, fillIn, findAll, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
-import { setupMirage } from 'ember-cli-mirage/test-support';
-import { setupIntl } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
-import { setupApplicationTest } from 'ember-qunit';
 import {
   assignVariants,
   selectByLabel,
+  setupApplicationTest,
   setupCustomAssertionsForProducts,
 } from 'ember-workshop/tests/helpers';
 import { module, test } from 'qunit';
@@ -14,8 +12,6 @@ import { module, test } from 'qunit';
 module('Acceptance | products', function (hooks) {
   setupApplicationTest(hooks);
   setupCustomAssertionsForProducts(hooks);
-  setupIntl(hooks);
-  setupMirage(hooks);
 
   hooks.beforeEach(function () {
     this.server.create('product', {

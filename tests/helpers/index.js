@@ -1,3 +1,5 @@
+import { setupMirage } from 'ember-cli-mirage/test-support';
+import { setupIntl } from 'ember-intl/test-support';
 import {
   setupApplicationTest as upstreamSetupApplicationTest,
   setupRenderingTest as upstreamSetupRenderingTest,
@@ -25,6 +27,9 @@ function setupApplicationTest(hooks, options) {
   //
   // setupIntl(hooks); // ember-intl
   // setupMirage(hooks); // ember-cli-mirage
+
+  setupIntl(hooks);
+  setupMirage(hooks);
 }
 
 function setupRenderingTest(hooks, options) {
