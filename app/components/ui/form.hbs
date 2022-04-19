@@ -1,68 +1,70 @@
-<form
-  aria-describedby={{if
-    @instructions
-    (concat this.formId "-instructions")
-  }}
-  aria-labelledby={{if @title (concat this.formId "-title")}}
-  data-test-form={{or @title ""}}
-  local-class="form"
-  {{autofocus}}
-  {{on "submit" this.submitForm}}
->
-  <Ui::Form::Information
-    @formId={{this.formId}}
-    @instructions={{@instructions}}
-    @title={{@title}}
-  />
-
-  <ContainerQuery
-    @features={{hash wide=(width min=480)}}
-    as |CQ|
-  >
-    {{yield
-      (hash
-        Checkbox=(component
-          "ui/form/checkbox"
-          changeset=this.changeset
-          isInline=true
-          isWide=CQ.features.wide
-          onUpdate=this.updateChangeset
-        )
-        Input=(component
-          "ui/form/input"
-          changeset=this.changeset
-          isWide=CQ.features.wide
-          onUpdate=this.updateChangeset
-        )
-        Number=(component
-          "ui/form/number"
-          changeset=this.changeset
-          isWide=CQ.features.wide
-          onUpdate=this.updateChangeset
-        )
-        Select=(component
-          "ui/form/select"
-          changeset=this.changeset
-          isWide=CQ.features.wide
-          onUpdate=this.updateChangeset
-        )
-        Textarea=(component
-          "ui/form/textarea"
-          changeset=this.changeset
-          isWide=CQ.features.wide
-          onUpdate=this.updateChangeset
-        )
-      )
+{{#let (unique-id) as |formId|}}
+  <form
+    aria-describedby={{if
+      @instructions
+      (concat formId "-instructions")
     }}
-  </ContainerQuery>
+    aria-labelledby={{if @title (concat formId "-title")}}
+    data-test-form={{or @title ""}}
+    local-class="form"
+    {{autofocus}}
+    {{on "submit" this.submitForm}}
+  >
+    <Ui::Form::Information
+      @formId={{formId}}
+      @instructions={{@instructions}}
+      @title={{@title}}
+    />
 
-  <div local-class="actions">
-    <button
-      data-test-button="Submit"
-      local-class="submit-button"
-      type="submit"
+    <ContainerQuery
+      @features={{hash wide=(width min=480)}}
+      as |CQ|
     >
-      {{t "components.ui.form.submit"}}
-    </button>
-  </div>
-</form>
+      {{yield
+        (hash
+          Checkbox=(component
+            "ui/form/checkbox"
+            changeset=this.changeset
+            isInline=true
+            isWide=CQ.features.wide
+            onUpdate=this.updateChangeset
+          )
+          Input=(component
+            "ui/form/input"
+            changeset=this.changeset
+            isWide=CQ.features.wide
+            onUpdate=this.updateChangeset
+          )
+          Number=(component
+            "ui/form/number"
+            changeset=this.changeset
+            isWide=CQ.features.wide
+            onUpdate=this.updateChangeset
+          )
+          Select=(component
+            "ui/form/select"
+            changeset=this.changeset
+            isWide=CQ.features.wide
+            onUpdate=this.updateChangeset
+          )
+          Textarea=(component
+            "ui/form/textarea"
+            changeset=this.changeset
+            isWide=CQ.features.wide
+            onUpdate=this.updateChangeset
+          )
+        )
+      }}
+    </ContainerQuery>
+
+    <div local-class="actions">
+      <button
+        data-test-button="Submit"
+        local-class="submit-button"
+        type="submit"
+      >
+        {{t "components.ui.form.submit"}}
+      </button>
+    </div>
+  </form>
+{{/let}}
