@@ -1,20 +1,16 @@
 import { click, currentURL, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
-import { setupMirage } from 'ember-cli-mirage/test-support';
-import { setupIntl } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
-import { setupApplicationTest } from 'ember-qunit';
 import {
   assignVariants,
   fillContactMeForm,
+  setupApplicationTest,
 } from 'ember-workshop/tests/helpers';
 import { Response } from 'miragejs';
 import { module, test } from 'qunit';
 
 module('Acceptance | form', function (hooks) {
   setupApplicationTest(hooks);
-  setupIntl(hooks);
-  setupMirage(hooks);
 
   test('Accessibility audit', async function (assert) {
     await visit('/form');
