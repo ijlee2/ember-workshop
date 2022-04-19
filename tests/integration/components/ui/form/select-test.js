@@ -1,8 +1,9 @@
 import { set } from '@ember/object';
-import { click, render, select } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupIntl } from 'ember-intl/test-support';
 import { setupRenderingTest } from 'ember-qunit';
+import { selectByLabel } from 'ember-workshop/tests/helpers';
 import { module, test } from 'qunit';
 
 module('Integration | Component | ui/form/select', function (hooks) {
@@ -186,7 +187,7 @@ module('Integration | Component | ui/form/select', function (hooks) {
       />
     `);
 
-    await select('[data-test-field="Sort by"]', 'price:desc');
+    await selectByLabel('[data-test-field="Sort by"]', 'Price: High to Low');
 
     assert
       .dom('[data-test-field="Sort by"]')
