@@ -1,17 +1,10 @@
-import {
-  click,
-  currentURL,
-  fillIn,
-  findAll,
-  select,
-  visit,
-} from '@ember/test-helpers';
+import { click, currentURL, fillIn, findAll, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupIntl } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import { setupApplicationTest } from 'ember-qunit';
-import { assignVariants } from 'ember-workshop/tests/helpers';
+import { assignVariants, selectByLabel } from 'ember-workshop/tests/helpers';
 import { module, test } from 'qunit';
 
 module('Acceptance | products', function (hooks) {
@@ -128,7 +121,7 @@ module('Acceptance | products', function (hooks) {
         .dom('[data-test-field="Name"]', products[1])
         .hasText('Black Forest Cake', 'The user sees the correct 2nd product.');
 
-      await select('[data-test-field="Sort by"]', 'name:asc');
+      await selectByLabel('[data-test-field="Sort by"]', 'Name: A to Z');
 
       assert.strictEqual(
         currentURL(),
