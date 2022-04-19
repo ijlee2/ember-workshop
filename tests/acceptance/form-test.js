@@ -1,10 +1,13 @@
-import { click, currentURL, fillIn, visit } from '@ember/test-helpers';
+import { click, currentURL, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupIntl } from 'ember-intl/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import { setupApplicationTest } from 'ember-qunit';
-import { assignVariants } from 'ember-workshop/tests/helpers';
+import {
+  assignVariants,
+  fillContactMeForm,
+} from 'ember-workshop/tests/helpers';
 import { Response } from 'miragejs';
 import { module, test } from 'qunit';
 
@@ -94,10 +97,12 @@ module('Acceptance | form', function (hooks) {
 
       await visit('/form');
 
-      await fillIn('[data-test-field="Name"]', 'Zoey');
-      await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
-      await fillIn('[data-test-field="Message"]', 'Gude!');
-      await fillIn('[data-test-field="Donation amount ($)"]', 10000);
+      await fillContactMeForm({
+        donation: 10000,
+        email: 'zoey@emberjs.com',
+        message: 'Gude!',
+        name: 'Zoey',
+      });
 
       assert
         .dom('[data-test-feedback]')
@@ -183,10 +188,12 @@ module('Acceptance | form', function (hooks) {
 
       await visit('/form');
 
-      await fillIn('[data-test-field="Name"]', 'Zoey');
-      await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
-      await fillIn('[data-test-field="Message"]', 'Gude!');
-      await click('[data-test-field="Subscribe to The Ember Times?"]');
+      await fillContactMeForm({
+        email: 'zoey@emberjs.com',
+        message: 'Gude!',
+        name: 'Zoey',
+        subscribe: false,
+      });
 
       assert
         .dom('[data-test-feedback]')
