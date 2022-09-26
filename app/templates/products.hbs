@@ -2,7 +2,10 @@
 
 <Ui::Page @title={{t "routes.products.title"}}>
   <div local-class="products">
-    <div local-class="filters">
+    <div
+      local-class="filters"
+      {{will-destroy this.resetQueryParameters}}
+    >
       <div local-class="filter">
         <Ui::Form::Input
           @changeset={{hash name=this.name}}

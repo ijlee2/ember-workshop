@@ -7,6 +7,10 @@ export default class ProductsController extends Controller {
 
   @tracked name;
 
+  @action resetQueryParameters() {
+    this.name = null;
+  }
+
   @action updateQueryParameters({ key, value }) {
     if (value === undefined || value === '') {
       this[key] = null;
