@@ -13,4 +13,8 @@ export default class ProductsRoute extends Route {
   model(params) {
     return this.store.query('product', params);
   }
+
+  resetController(controller) {
+    controller.name = null;
+  }
 }
