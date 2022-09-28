@@ -22,5 +22,37 @@
         }}
       />
     </div>
+
+    <div local-class="field">
+      <F.Input
+        @isRequired={{true}}
+        @key="email"
+        @label={{t
+          "routes.form.contact-me-form.fields.email.label"
+        }}
+        @placeholder={{t
+          "routes.form.contact-me-form.fields.email.placeholder"
+        }}
+        @type="email"
+      />
+    </div>
+
+    <div local-class="field">
+      <F.Textarea
+        @key="message"
+        @label={{t
+          "routes.form.contact-me-form.fields.message.label"
+        }}
+      />
+    </div>
+
+    <div local-class="field">
+      <F.Checkbox
+        @key="subscribe"
+        @label={{t
+          "routes.form.contact-me-form.fields.subscribe.label"
+        }}
+      />
+    </div>
   </Ui::Form>
 </Ui::Page>
