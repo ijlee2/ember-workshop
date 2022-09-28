@@ -8,5 +8,19 @@
     }}
     @onSubmit={{this.submitForm}}
     @title={{t "routes.form.contact-me-form.title"}}
-  />
+    as |F|
+  >
+    <div local-class="field">
+      <F.Input
+        @isRequired={{true}}
+        @key="name"
+        @label={{t
+          "routes.form.contact-me-form.fields.name.label"
+        }}
+        @placeholder={{t
+          "routes.form.contact-me-form.fields.name.placeholder"
+        }}
+      />
+    </div>
+  </Ui::Form>
 </Ui::Page>
