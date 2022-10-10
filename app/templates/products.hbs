@@ -1,7 +1,7 @@
 {{page-title (t "routes.products.title")}}
 
 <Ui::Page @title={{t "routes.products.title"}}>
-  <div local-class="products-with-details">
+  <div local-class="products">
     <div local-class="filters">
       Filters
     </div>
@@ -10,7 +10,7 @@
       {{#each @model as |product|}}
         <Products::Product::Card
           @product={{product}}
-          @redirectTo="products.product"
+          @redirectTo="product-details"
         />
       {{else}}
         <p>

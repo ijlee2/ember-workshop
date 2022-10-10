@@ -1,0 +1,15 @@
+{{page-title @model.id}}
+
+<Ui::Page @title={{t "routes.product-details.title"}}>
+  <div local-class="products">
+    <div local-class="product-details">
+      {{@model.id}}
+    </div>
+
+    <div local-class="actions">
+      <LinkTo @route="products" data-test-link="Back">
+        {{t "routes.product-details.back"}}
+      </LinkTo>
+    </div>
+  </div>
+</Ui::Page>
