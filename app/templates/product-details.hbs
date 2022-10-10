@@ -1,9 +1,9 @@
-{{page-title @model.id}}
+{{page-title @model.name}}
 
 <Ui::Page @title={{t "routes.product-details.title"}}>
   <div local-class="products">
     <div local-class="product-details">
-      {{@model.id}}
+      <Products::Product::Details @product={{@model}} />
     </div>
 
     <div local-class="actions">
