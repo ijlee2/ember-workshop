@@ -3,7 +3,17 @@
 <Ui::Page @title={{t "routes.products.title"}}>
   <div local-class="products">
     <div local-class="filters">
-      Filters
+      <div local-class="filter">
+        <Ui::Form::Input
+          @changeset={{hash name=this.name}}
+          @key="name"
+          @label={{t "routes.products.filter-by.name.label"}}
+          @onUpdate={{this.updateQueryParameters}}
+          @placeholder={{t
+            "routes.products.filter-by.name.placeholder"
+          }}
+        />
+      </div>
     </div>
 
     <div local-class="list">
