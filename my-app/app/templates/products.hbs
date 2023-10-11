@@ -9,9 +9,10 @@
     <div class={{this.styles.list}}>
       {{#each this.model as |product|}}
         <div>
-          {{product.id}}
-          -
-          {{product.name}}
+          <Products::Product::Card
+            @product={{product}}
+            @redirectTo="products.product"
+          />
         </div>
       {{else}}
         <p>
