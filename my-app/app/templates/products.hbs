@@ -20,10 +20,23 @@
           }}
         />
       </div>
+
+      <div class={{this.styles.filter}}>
+        <Ui::Form::Select
+          @changeset={{hash sortBy=this.sortBy}}
+          @key="sortBy"
+          @label={{t "routes.products.sort-by.label"}}
+          @onUpdate={{perform this.updateQueryParameters}}
+          @options={{this.options}}
+        />
+      </div>
     </div>
 
     <div class={{this.styles.list}}>
-      {{#each this.model as |product|}}
+      {{#each
+        (sort-by (if this.sortBy this.sortBy "") this.model)
+        as |product|
+      }}
         <div>
           <Products::Product::Card
             @product={{product}}

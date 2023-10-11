@@ -14,15 +14,38 @@ export default class ProductsController extends Controller {
 
   styles = styles;
 
-  queryParams = ['name'];
+  queryParams = ['name', 'sortBy'];
 
   @service declare experiments: Services['experiments'];
+  @service declare intl: Services['intl'];
 
   @tracked name: string | null = null;
+  @tracked sortBy: string | null = null;
+
+  get options(): { label: string; value: string }[] {
+    return [
+      {
+        label: this.intl.t('routes.products.sort-by.name-ascending'),
+        value: 'name:asc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.name-descending'),
+        value: 'name:desc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.price-ascending'),
+        value: 'price:asc',
+      },
+      {
+        label: this.intl.t('routes.products.sort-by.price-descending'),
+        value: 'price:desc',
+      },
+    ];
+  }
 
   updateQueryParameters = restartableTask(
     async ({ key, value }: { key: string; value: any }) => {
-      if (key !== 'name') {
+      if (key !== 'name' && key !== 'sortBy') {
         return;
       }
 
