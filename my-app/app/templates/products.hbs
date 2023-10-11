@@ -1,7 +1,13 @@
 {{page-title (t "routes.products.title")}}
 
 <Ui::Page @title={{t "routes.products.title"}}>
-  <div class={{this.styles.products}}>
+  <div
+    class={{if
+      (experiment name="nest-product-details" variant="v1")
+      this.styles.products-with-details
+      this.styles.products
+    }}
+  >
     <div class={{this.styles.filters}}>
       <div class={{this.styles.filter}}>
         <Ui::Form::Input
@@ -21,7 +27,13 @@
         <div>
           <Products::Product::Card
             @product={{product}}
-            @redirectTo="product-details"
+            @redirectTo={{if
+              (experiment
+                name="nest-product-details" variant="v1"
+              )
+              "products.product"
+              "product-details"
+            }}
           />
         </div>
       {{else}}
