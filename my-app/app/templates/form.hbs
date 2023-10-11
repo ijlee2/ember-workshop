@@ -1,5 +1,10 @@
 {{page-title (t "routes.form.title")}}
 
 <Ui::Page @title={{t "routes.form.title"}}>
-  {{outlet}}
+  <Ui::Form
+    @instructions={{t
+      "routes.form.contact-me-form.instructions"
+    }}
+    @title={{t "routes.form.contact-me-form.title"}}
+  />
 </Ui::Page>
