@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import type { WithBoundArgs } from '@glint/template';
 
 import styles from './form.css';
+import type UiFormCheckboxComponent from './form/checkbox';
 import type UiFormInputComponent from './form/input';
 import type UiFormTextareaComponent from './form/textarea';
 
@@ -17,6 +18,10 @@ interface UiFormSignature {
   Blocks: {
     default: [
       {
+        Checkbox: WithBoundArgs<
+          typeof UiFormCheckboxComponent,
+          'changeset' | 'isInline' | 'isWide' | 'onUpdate'
+        >;
         Input: WithBoundArgs<
           typeof UiFormInputComponent,
           'changeset' | 'isWide' | 'onUpdate'
