@@ -1,17 +1,30 @@
-<form
-  class={{this.styles.form}}
-  data-test-form={{if @title @title ""}}
-  {{on "submit" this.submitForm}}
->
-  {{yield}}
+{{#let (unique-id) as |formId|}}
+  <form
+    aria-describedby={{if
+      @instructions
+      (concat formId "-instructions")
+    }}
+    aria-labelledby={{if @title (concat formId "-title")}}
+    class={{this.styles.form}}
+    data-test-form={{if @title @title ""}}
+    {{on "submit" this.submitForm}}
+  >
+    <Ui::Form::Information
+      @formId={{formId}}
+      @instructions={{@instructions}}
+      @title={{@title}}
+    />
 
-  <div class={{this.styles.actions}}>
-    <button
-      class={{this.styles.submit-button}}
-      data-test-button="Submit"
-      type="submit"
-    >
-      {{t "components.ui.form.submit"}}
-    </button>
-  </div>
-</form>
+    {{yield}}
+
+    <div class={{this.styles.actions}}>
+      <button
+        class={{this.styles.submit-button}}
+        data-test-button="Submit"
+        type="submit"
+      >
+        {{t "components.ui.form.submit"}}
+      </button>
+    </div>
+  </form>
+{{/let}}
