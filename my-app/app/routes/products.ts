@@ -18,6 +18,9 @@ export default class ProductsRoute extends Route {
     name: {
       refreshModel: true,
     },
+    sortBy: {
+      refreshModel: false,
+    },
   };
 
   constructor(owner: Owner) {
@@ -38,6 +41,7 @@ export default class ProductsRoute extends Route {
 
   resetController(controller: ProductsController) {
     controller.name = null;
+    controller.sortBy = null;
   }
 }
 
