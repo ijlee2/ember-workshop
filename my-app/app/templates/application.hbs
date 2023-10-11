@@ -2,6 +2,11 @@
 
 <div class={{this.styles.application}}>
   <header class={{this.styles.header}}>
+    <NavigationNarrator
+      @navigationText={{t "routes.application.navigation-text"}}
+      @skipText={{t "routes.application.skip-text"}}
+      @skipTo="#main-content"
+    />
   </header>
 
   <main class={{this.styles.main}}>
