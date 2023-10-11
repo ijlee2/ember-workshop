@@ -7,7 +7,17 @@
     </div>
 
     <div class={{this.styles.list}}>
-      List of products
+      {{#each this.model as |product|}}
+        <div>
+          {{product.id}}
+          -
+          {{product.name}}
+        </div>
+      {{else}}
+        <p>
+          {{t "routes.products.no-products-found"}}
+        </p>
+      {{/each}}
     </div>
 
     <div class={{this.styles.product-details}}>
