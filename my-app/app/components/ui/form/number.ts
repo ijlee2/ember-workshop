@@ -1,6 +1,7 @@
 import { action, get } from '@ember/object';
 import Component from '@glimmer/component';
 
+import { generateErrorMessage } from '../../../utils/components/ui/form';
 import styles from './number.css';
 
 interface UiFormNumberSignature {
@@ -27,15 +28,11 @@ export default class UiFormNumberComponent extends Component<UiFormNumberSignatu
   get errorMessage(): string | undefined {
     const { isRequired } = this.args;
 
-    if (!isRequired) {
-      return undefined;
-    }
-
-    if (!this.value) {
-      return 'Please provide a value.';
-    }
-
-    return undefined;
+    return generateErrorMessage({
+      isRequired,
+      value: this.value,
+      valueType: 'number',
+    });
   }
 
   get value(): string {
