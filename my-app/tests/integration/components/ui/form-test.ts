@@ -1,5 +1,6 @@
 import {
   click,
+  fillIn,
   find,
   render,
   type TestContext as BaseTestContext,
@@ -40,7 +41,27 @@ module('Integration | Component | ui/form', function (hooks) {
         @instructions="Still have questions about ember-container-query? Try sending me a message."
         @onSubmit={{this.submitForm}}
         @title="Contact me"
-      />
+        as |F|
+      >
+        <div>
+          <F.Input
+            @isRequired={{true}}
+            @key="name"
+            @label="Name"
+            @placeholder="Zoey"
+          />
+        </div>
+
+        <div>
+          <F.Input
+            @isRequired={{true}}
+            @key="email"
+            @label="Email"
+            @placeholder="zoey@emberjs.com"
+            @type="email"
+          />
+        </div>
+      </Ui::Form>
     `);
 
     const titleId = find('[data-test-title]')!.getAttribute('id')!;
@@ -57,7 +78,7 @@ module('Integration | Component | ui/form', function (hooks) {
       )
       .hasAria('labelledby', titleId, 'We see the correct aria-labelledby.');
 
-    assert.dom('[data-test-field]').exists({ count: 0 }, 'We see 0 fields.');
+    assert.dom('[data-test-field]').exists({ count: 2 }, 'We see 2 fields.');
 
     assert
       .dom('[data-test-button="Submit"]')
@@ -81,17 +102,40 @@ module('Integration | Component | ui/form', function (hooks) {
           subscribe=true
         }}
         @onSubmit={{this.submitForm}}
-      />
+        as |F|
+      >
+        <div>
+          <F.Input
+            @isRequired={{true}}
+            @key="name"
+            @label="Name"
+            @placeholder="Zoey"
+          />
+        </div>
+
+        <div>
+          <F.Input
+            @isRequired={{true}}
+            @key="email"
+            @label="Email"
+            @placeholder="zoey@emberjs.com"
+            @type="email"
+          />
+        </div>
+      </Ui::Form>
     `);
+
+    await fillIn('[data-test-field="Name"]', 'Zoey');
+    await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
 
     await click('[data-test-button="Submit"]');
 
     assert.true(
       this.submitForm.calledOnceWith({
         donation: undefined,
-        email: undefined,
+        email: 'zoey@emberjs.com',
         message: 'I 🧡 container queries!',
-        name: undefined,
+        name: 'Zoey',
         subscribe: true,
       }),
       'We called @onSubmit once.',
