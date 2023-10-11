@@ -18,7 +18,11 @@ const UiPageComponent: TOC<UiPageSignature> =
         {{@title}}
       </h1>
 
-      <div class={{styles.content}}>
+      <div
+        class={{styles.content}}
+        id="main-content"
+        tabindex="-1"
+      >
         {{yield}}
       </div>
     </div>
