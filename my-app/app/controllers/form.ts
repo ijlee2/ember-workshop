@@ -8,6 +8,7 @@ export default class FormController extends Controller {
 
   get initialData(): Record<string, any> {
     return {
+      donation: undefined,
       email: undefined,
       message: 'I 🧡 container queries!',
       name: undefined,
