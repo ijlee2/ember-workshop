@@ -71,6 +71,16 @@ module('Integration | Component | ui/form', function (hooks) {
             @label="Subscribe to The Ember Times?"
           />
         </div>
+
+        <div>
+          <F.Number
+            @key="donation"
+            @label="Donation amount ($)"
+            @minValue={{0}}
+            @placeholder="100"
+            @step={{10}}
+          />
+        </div>
       </Ui::Form>
     `);
 
@@ -88,7 +98,7 @@ module('Integration | Component | ui/form', function (hooks) {
       )
       .hasAria('labelledby', titleId, 'We see the correct aria-labelledby.');
 
-    assert.dom('[data-test-field]').exists({ count: 4 }, 'We see 4 fields.');
+    assert.dom('[data-test-field]').exists({ count: 5 }, 'We see 5 fields.');
 
     assert
       .dom('[data-test-button="Submit"]')
@@ -146,6 +156,16 @@ module('Integration | Component | ui/form', function (hooks) {
             @label="Subscribe to The Ember Times?"
           />
         </div>
+
+        <div>
+          <F.Number
+            @key="donation"
+            @label="Donation amount ($)"
+            @minValue={{0}}
+            @placeholder="100"
+            @step={{10}}
+          />
+        </div>
       </Ui::Form>
     `);
 
@@ -153,12 +173,13 @@ module('Integration | Component | ui/form', function (hooks) {
     await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
     await fillIn('[data-test-field="Message"]', 'Gude!');
     await click('[data-test-field="Subscribe to The Ember Times?"]');
+    await fillIn('[data-test-field="Donation amount ($)"]', '10000');
 
     await click('[data-test-button="Submit"]');
 
     assert.true(
       this.submitForm.calledOnceWith({
-        donation: undefined,
+        donation: 10000,
         email: 'zoey@emberjs.com',
         message: 'Gude!',
         name: 'Zoey',
