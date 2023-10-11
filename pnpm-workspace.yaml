@@ -1,0 +1,6 @@
+packages:
+  - my-addon
+  - my-app
+
+patchedDependencies:
+  ember-a11y-refocus: patches/ember-a11y-refocus.patch
