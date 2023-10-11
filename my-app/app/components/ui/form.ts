@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import type { WithBoundArgs } from '@glint/template';
+import { TrackedObject } from 'tracked-built-ins';
 
 import styles from './form.css';
 import type UiFormCheckboxComponent from './form/checkbox';
@@ -43,7 +43,7 @@ interface UiFormSignature {
 export default class UiFormComponent extends Component<UiFormSignature> {
   styles = styles;
 
-  @tracked changeset: Record<string, any> = this.args.data ?? {};
+  changeset = new TrackedObject<Record<string, any>>(this.args.data ?? {});
 
   @action async submitForm(event: SubmitEvent): Promise<void> {
     event.preventDefault();
@@ -52,10 +52,7 @@ export default class UiFormComponent extends Component<UiFormSignature> {
   }
 
   @action updateChangeset({ key, value }: { key: string; value: any }): void {
-    this.changeset = {
-      ...this.changeset,
-      [key]: value,
-    };
+    this.changeset[key] = value;
   }
 }
 
