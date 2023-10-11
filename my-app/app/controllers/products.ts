@@ -7,6 +7,7 @@ import styles from './products.css';
 
 export default class ProductsController extends Controller {
   declare model: Model;
+  queryParams = ['name'];
 
   @tracked name: string | null = null;
 
