@@ -1,8 +1,10 @@
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import type { WithBoundArgs } from '@glint/template';
 
 import styles from './form.css';
+import type UiFormInputComponent from './form/input';
 
 interface UiFormSignature {
   Args: {
@@ -12,7 +14,14 @@ interface UiFormSignature {
     title?: string;
   };
   Blocks: {
-    default: [];
+    default: [
+      {
+        Input: WithBoundArgs<
+          typeof UiFormInputComponent,
+          'changeset' | 'isWide' | 'onUpdate'
+        >;
+      },
+    ];
   };
 }
 
@@ -25,6 +34,13 @@ export default class UiFormComponent extends Component<UiFormSignature> {
     event.preventDefault();
 
     await this.args.onSubmit(this.changeset);
+  }
+
+  @action updateChangeset({ key, value }: { key: string; value: any }): void {
+    this.changeset = {
+      ...this.changeset,
+      [key]: value,
+    };
   }
 }
 
