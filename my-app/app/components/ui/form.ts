@@ -7,6 +7,7 @@ import styles from './form.css';
 import type UiFormCheckboxComponent from './form/checkbox';
 import type UiFormInputComponent from './form/input';
 import type UiFormNumberComponent from './form/number';
+import type UiFormSelectComponent from './form/select';
 import type UiFormTextareaComponent from './form/textarea';
 
 interface UiFormSignature {
@@ -29,6 +30,10 @@ interface UiFormSignature {
         >;
         Number: WithBoundArgs<
           typeof UiFormNumberComponent,
+          'changeset' | 'isWide' | 'onUpdate'
+        >;
+        Select: WithBoundArgs<
+          typeof UiFormSelectComponent,
           'changeset' | 'isWide' | 'onUpdate'
         >;
         Textarea: WithBoundArgs<
