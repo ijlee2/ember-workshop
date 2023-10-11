@@ -10,6 +10,8 @@ export default class ProductsController extends Controller {
 
   styles = styles;
 
+  queryParams = ['name'];
+
   @tracked name: string | null = null;
 
   @action updateQueryParameters({
