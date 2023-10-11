@@ -1,0 +1,17 @@
+<form
+  class={{this.styles.form}}
+  data-test-form={{if @title @title ""}}
+  {{on "submit" this.submitForm}}
+>
+  {{yield}}
+
+  <div class={{this.styles.actions}}>
+    <button
+      class={{this.styles.submit-button}}
+      data-test-button="Submit"
+      type="submit"
+    >
+      {{t "components.ui.form.submit"}}
+    </button>
+  </div>
+</form>
