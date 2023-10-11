@@ -100,6 +100,12 @@ ul {
   list-style-type: none;
 }
 
+:global(.input-disabled) {
+  background-color: #9ea4b0 !important;
+  color: #546e7a !important;
+  cursor: not-allowed !important;
+}
+
 :global(#ember-testing-container) {
   overflow: hidden !important;
 }
