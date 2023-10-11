@@ -44,3 +44,4 @@ export {
   setupRenderingTest,
   setupTest,
 };
+export * from './components/ui/form/select';

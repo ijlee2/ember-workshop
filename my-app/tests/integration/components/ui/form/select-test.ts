@@ -2,12 +2,11 @@ import { set } from '@ember/object';
 import {
   click,
   render,
-  select,
   type TestContext as BaseTestContext,
 } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupIntl } from 'ember-intl/test-support';
-import { setupRenderingTest } from 'my-app/tests/helpers';
+import { selectByLabel, setupRenderingTest } from 'my-app/tests/helpers';
 import { module, test } from 'qunit';
 
 interface TestContext extends BaseTestContext {
@@ -206,7 +205,7 @@ module('Integration | Component | ui/form/select', function (hooks) {
       />
     `);
 
-    await select('[data-test-field="Sort by"]', 'price:desc');
+    await selectByLabel('[data-test-field="Sort by"]', 'Price: High to Low');
 
     assert
       .dom('[data-test-field="Sort by"]')
