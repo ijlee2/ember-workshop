@@ -1,0 +1,20 @@
+.select-container {
+  display: grid;
+  grid-column-gap: 0.75rem;
+  grid-template-areas: "select clear-button";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+}
+
+.select {
+  composes: input from "./input.css";
+  grid-area: select;
+}
+
+.is-disabled {
+  composes: input-disabled from global;
+}
+
+.clear-button {
+  grid-area: clear-button;
+}
