@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { type Registry as Services, service } from '@ember/service';
 import { isTesting, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
 import { restartableTask, timeout } from 'ember-concurrency';
@@ -14,6 +15,8 @@ export default class ProductsController extends Controller {
   styles = styles;
 
   queryParams = ['name'];
+
+  @service declare experiments: Services['experiments'];
 
   @tracked name: string | null = null;
 
