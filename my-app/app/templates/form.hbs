@@ -2,9 +2,11 @@
 
 <Ui::Page @title={{t "routes.form.title"}}>
   <Ui::Form
+    @data={{this.initialData}}
     @instructions={{t
       "routes.form.contact-me-form.instructions"
     }}
+    @onSubmit={{this.submitForm}}
     @title={{t "routes.form.contact-me-form.title"}}
   />
 </Ui::Page>
