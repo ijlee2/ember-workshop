@@ -1,0 +1,58 @@
+{
+  "extends": "@tsconfig/ember/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "my-app/tests/*": ["tests/*"],
+      "my-app/*": ["app/*"],
+      "*": ["types/*"]
+    },
+    "skipLibCheck": true,
+    "types": [
+      "ember-source/types"
+    ]
+  },
+  "include": [
+    "app/**/*",
+    "mirage/**/*",
+    "tests/**/*",
+    "types/**/*"
+  ],
+  "glint": {
+    // https://github.com/typed-ember/glint/discussions/547#discussioncomment-5415889
+    "environment": {
+      "ember-loose": {
+        "additionalSpecialForms": {
+          "globals": {
+            "and": "&&",
+            "eq": "===",
+            "not": "!",
+            "not-eq": "!==",
+            "or": "||"
+          }
+        }
+      },
+      "ember-template-imports": {
+        "additionalSpecialForms": {
+          "imports": {
+            "ember-truth-helpers/helpers/and": {
+              "default": "&&"
+            },
+            "ember-truth-helpers/helpers/eq": {
+              "default": "==="
+            },
+            "ember-truth-helpers/helpers/not": {
+              "default": "!"
+            },
+            "ember-truth-helpers/helpers/not-eq": {
+              "default": "!=="
+            },
+            "ember-truth-helpers/helpers/or": {
+              "default": "||"
+            }
+          }
+        }
+      }
+    }
+  }
+}
