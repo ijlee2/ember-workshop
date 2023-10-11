@@ -1,0 +1,7 @@
+.textarea {
+  composes: input from "./input.css";
+}
+
+.is-disabled {
+  composes: input-disabled from global;
+}
