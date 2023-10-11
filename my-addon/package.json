@@ -103,7 +103,9 @@
     "edition": "octane"
   },
   "ember-addon": {
-    "app-js": {},
+    "app-js": {
+      "./components/navigation-menu.js": "./dist/_app_/components/navigation-menu.js"
+    },
     "main": "addon-main.cjs",
     "public-assets": {},
     "type": "addon",
