@@ -1,3 +1,7 @@
 import Controller from '@ember/controller';
 
-export default class ApplicationController extends Controller {}
+import styles from './application.css';
+
+export default class ApplicationController extends Controller {
+  styles = styles;
+}

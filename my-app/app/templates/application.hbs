@@ -1,1 +1,18 @@
 {{page-title (t "routes.application.app-name")}}
+
+<div class={{this.styles.application}}>
+  <header class={{this.styles.header}}>
+  </header>
+
+  <main class={{this.styles.main}}>
+    <div class={{this.styles.center}}>
+      {{outlet}}
+    </div>
+  </main>
+
+  <footer class={{this.styles.footer}}>
+    <span class={{this.styles.copyright}}>
+      {{t "routes.application.copyright" htmlSafe=true}}
+    </span>
+  </footer>
+</div>
