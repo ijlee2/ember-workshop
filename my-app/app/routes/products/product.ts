@@ -4,15 +4,22 @@ import { type Registry as Services, service } from '@ember/service';
 
 import type { ModelFrom } from '../../utils/routes';
 import type { Product } from '../../utils/routes/products';
+import type ProductsRoute from '../products';
 
 export default class ProductsProductRoute extends Route {
-  @service declare api: Services['api'];
   @service declare router: Services['router'];
 
-  model(params: { id: string }): Promise<Product> {
+  model(params: { id: string }): Product {
     const { id } = params;
+    const products = this.modelFor('products') as ModelFrom<ProductsRoute>;
 
-    return this.api.get<Product>(`/products/${id}`);
+    const product = products.find((product) => product.id === id);
+
+    if (!product) {
+      throw new Error(`Could not find the product with ID ${id}.`);
+    }
+
+    return product;
   }
 
   @action error(/* error, transition */) {
