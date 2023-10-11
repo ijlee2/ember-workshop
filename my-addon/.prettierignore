@@ -1,0 +1,15 @@
+# unconventional js
+/blueprints/*/files/
+
+# compiled output
+/declarations/
+/dist/
+
+# misc
+/coverage/
+!.*
+.*/
+
+# <template> tag
+/**/*.gjs
+/**/*.gts
