@@ -12,8 +12,11 @@ interface UiFormInputSignature {
     isWide?: boolean;
     key: string;
     label: string;
+    maxValue?: number;
+    minValue?: number;
     onUpdate: ({ key, value }: { key: string; value: any }) => void;
     placeholder?: string;
+    step?: number | 'any';
     type?: string;
   };
 }
@@ -46,8 +49,20 @@ export default class UiFormInputComponent extends Component<UiFormInputSignature
   }
 
   @action updateValue(event: Event): void {
-    const { key, onUpdate } = this.args;
+    const { key, onUpdate, type } = this.args;
     const { value } = event.target as HTMLInputElement;
+
+    if (type === 'number') {
+      const valueAsNumber = Number.parseFloat(value);
+
+      if (Number.isNaN(valueAsNumber)) {
+        onUpdate({ key, value: undefined });
+        return;
+      }
+
+      onUpdate({ key, value: valueAsNumber });
+      return;
+    }
 
     onUpdate({ key, value });
   }
