@@ -68,6 +68,13 @@ module('Integration | Component | ui/form', function (hooks) {
             @label="Message"
           />
         </div>
+
+        <div>
+          <F.Checkbox
+            @key="subscribe"
+            @label="Subscribe to The Ember Times?"
+          />
+        </div>
       </Ui::Form>
     `);
 
@@ -85,7 +92,7 @@ module('Integration | Component | ui/form', function (hooks) {
       )
       .hasAria('labelledby', titleId, 'We see the correct aria-labelledby.');
 
-    assert.dom('[data-test-field]').exists({ count: 3 }, 'We see 3 fields.');
+    assert.dom('[data-test-field]').exists({ count: 4 }, 'We see 4 fields.');
 
     assert
       .dom('[data-test-button="Submit"]')
@@ -136,12 +143,20 @@ module('Integration | Component | ui/form', function (hooks) {
             @label="Message"
           />
         </div>
+
+        <div>
+          <F.Checkbox
+            @key="subscribe"
+            @label="Subscribe to The Ember Times?"
+          />
+        </div>
       </Ui::Form>
     `);
 
     await fillIn('[data-test-field="Name"]', 'Zoey');
     await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
     await fillIn('[data-test-field="Message"]', 'Gude!');
+    await click('[data-test-field="Subscribe to The Ember Times?"]');
 
     await click('[data-test-button="Submit"]');
 
@@ -151,7 +166,7 @@ module('Integration | Component | ui/form', function (hooks) {
         email: 'zoey@emberjs.com',
         message: 'Gude!',
         name: 'Zoey',
-        subscribe: true,
+        subscribe: false,
       }),
       'We called @onSubmit once.',
     );
