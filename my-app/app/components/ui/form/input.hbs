@@ -24,12 +24,9 @@
       data-test-field={{@label}}
       disabled={{@isDisabled}}
       id={{f.inputId}}
-      max={{@maxValue}}
-      min={{@minValue}}
       placeholder={{@placeholder}}
       readonly={{@isReadOnly}}
       required={{@isRequired}}
-      step={{if @step @step "any"}}
       type={{this.type}}
       value={{this.value}}
       {{on "input" this.updateValue}}
