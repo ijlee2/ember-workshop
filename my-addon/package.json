@@ -1,0 +1,112 @@
+{
+  "name": "my-addon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An Ember addon to illustrate core concepts in Ember (v5)",
+  "keywords": [
+    "emberjs",
+    "ember-addon",
+    "embroider"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ijlee2/ember-workshop.git"
+  },
+  "license": "MIT",
+  "author": "Isaac J. Lee",
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  },
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist"
+  ],
+  "scripts": {
+    "build": "concurrently 'pnpm:build:*' --names 'build:'",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
+    "lint": "concurrently 'pnpm:lint:*(!fix)' --names 'lint:'",
+    "lint:css": "stylelint '**/*.css' --allow-empty-input --cache",
+    "lint:css:fix": "stylelint '**/*.css' --allow-empty-input --fix",
+    "lint:fix": "concurrently 'pnpm:lint:*:fix' --names 'fix:'",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "prelint:types": "type-css-modules --src src",
+    "lint:types": "glint",
+    "prepack": "rollup --config",
+    "start": "concurrently 'pnpm:start:*' --names 'start:'",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in my-app'"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.9.0",
+    "decorator-transforms": "^2.3.0",
+    "embroider-css-modules": "^2.0.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-typescript": "^7.26.5",
+    "@babel/runtime": "^7.26.0",
+    "@embroider/addon-dev": "^7.1.1",
+    "@glimmer/component": "^2.0.0",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.5.1",
+    "@glint/environment-ember-loose": "^1.5.1",
+    "@glint/environment-ember-template-imports": "^1.5.1",
+    "@glint/template": "^1.5.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@shared-configs/ember-template-lint": "workspace:*",
+    "@shared-configs/eslint-config-ember": "workspace:*",
+    "@shared-configs/prettier": "workspace:*",
+    "@shared-configs/stylelint": "workspace:*",
+    "@shared-configs/typescript": "workspace:*",
+    "babel-plugin-ember-template-compilation": "^2.3.0",
+    "concurrently": "^9.1.2",
+    "ember-source": "~5.12.0",
+    "ember-template-lint": "^6.0.0",
+    "eslint": "^8.57.1",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "rollup": "^4.30.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "stylelint": "^16.13.1",
+    "type-css-modules": "^1.0.14",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": "18.* || >= 20"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "app-js": {},
+    "main": "addon-main.cjs",
+    "public-assets": {},
+    "type": "addon",
+    "version": 2
+  }
+}

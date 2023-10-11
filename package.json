@@ -1,0 +1,33 @@
+{
+  "name": "workspace-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workspace root for ember-workshop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ijlee2/ember-workshop.git"
+  },
+  "license": "MIT",
+  "author": "Isaac J. Lee",
+  "type": "module",
+  "scripts": {
+    "build": "concurrently 'pnpm:build:*'",
+    "build:my-addon": "pnpm --filter my-addon build",
+    "build:my-app": "pnpm --filter my-app build",
+    "lint": "pnpm --filter '*' lint",
+    "lint:fix": "pnpm --filter '*' lint:fix",
+    "prepare": "pnpm build:my-addon",
+    "start": "concurrently 'pnpm:start:*' --restart-after 5000 --prefix-colors cyan,yellow",
+    "start:my-addon": "pnpm --filter my-addon start",
+    "start:my-app": "pnpm --filter my-app start",
+    "test": "pnpm --filter my-app test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": "18.* || >= 20",
+    "pnpm": ">= 9"
+  }
+}

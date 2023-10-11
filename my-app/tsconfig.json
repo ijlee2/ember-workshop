@@ -1,0 +1,24 @@
+{
+  "extends": "@shared-configs/typescript/ember",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "my-app/tests/*": ["tests/*"],
+      "my-app/*": ["app/*"],
+      "*": ["types/*"]
+    },
+    "skipLibCheck": true
+  },
+  "include": [
+    "app/**/*",
+    "mirage/**/*",
+    "tests/**/*",
+    "types/**/*"
+  ],
+  "glint": {
+    "environment": [
+      "ember-loose",
+      "ember-template-imports"
+    ]
+  }
+}
