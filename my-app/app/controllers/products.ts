@@ -1,9 +1,12 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
+import { isTesting, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
+import { restartableTask, timeout } from 'ember-concurrency';
 
 import type { Model } from '../routes/products';
 import styles from './products.css';
+
+const TIMEOUT_IN_MILLISECONDS = macroCondition(isTesting()) ? 1 : 300;
 
 export default class ProductsController extends Controller {
   declare model: Model;
@@ -14,22 +17,20 @@ export default class ProductsController extends Controller {
 
   @tracked name: string | null = null;
 
-  @action updateQueryParameters({
-    key,
-    value,
-  }: {
-    key: string;
-    value: any;
-  }): void {
-    if (key !== 'name') {
-      return;
-    }
+  updateQueryParameters = restartableTask(
+    async ({ key, value }: { key: string; value: any }) => {
+      if (key !== 'name') {
+        return;
+      }
 
-    if (value === undefined || value === '') {
-      this[key] = null;
-      return;
-    }
+      await timeout(TIMEOUT_IN_MILLISECONDS);
 
-    this[key] = value;
-  }
+      if (value === undefined || value === '') {
+        this[key] = null;
+        return;
+      }
+
+      this[key] = value;
+    },
+  );
 }
