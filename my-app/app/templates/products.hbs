@@ -1,5 +1,17 @@
 {{page-title (t "routes.products.title")}}
 
 <Ui::Page @title={{t "routes.products.title"}}>
-  {{outlet}}
+  <div class={{this.styles.products-with-details}}>
+    <div class={{this.styles.filters}}>
+      Filters
+    </div>
+
+    <div class={{this.styles.list}}>
+      List of products
+    </div>
+
+    <div class={{this.styles.product-details}}>
+      {{outlet}}
+    </div>
+  </div>
 </Ui::Page>
