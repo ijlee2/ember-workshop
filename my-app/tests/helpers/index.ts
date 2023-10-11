@@ -45,3 +45,4 @@ export {
   setupTest,
 };
 export * from './components/ui/form/select';
+export * from './routes/form';
