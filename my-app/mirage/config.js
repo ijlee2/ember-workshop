@@ -15,7 +15,7 @@ function routes() {
     Uncomment the next line to make the loading spinner
     visible for some time.
   */
-  this.timing = 1000;
+  // this.timing = 1000;
 
   /*
     Shorthand cheatsheet:
