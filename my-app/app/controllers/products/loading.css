@@ -1,0 +1,3 @@
+.container {
+  composes: product-details from "./product.css";
+}
