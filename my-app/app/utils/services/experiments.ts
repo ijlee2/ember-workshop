@@ -1,7 +1,7 @@
 const experimentsForProduction = {
   'nest-product-details': {
-    control: 0,
-    v1: 1,
+    control: 0.5,
+    v1: 0.5,
   },
   'subscribe-to-ember-times': {
     control: 0.7,
