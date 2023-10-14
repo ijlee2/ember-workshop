@@ -4,9 +4,9 @@ import { type Registry as Services, service } from '@ember/service';
 
 import type { ModelFrom } from '../../utils/routes';
 import type { Product } from '../../utils/routes/products';
+import type ProductsRoute from '../products';
 
 export default class ProductsProductRoute extends Route {
-  @service declare api: Services['api'];
   @service declare experiments: Services['experiments'];
   @service declare router: Services['router'];
 
@@ -23,23 +23,21 @@ export default class ProductsProductRoute extends Route {
     }
   }
 
-  model(params: { id: string }): Promise<Product> {
+  model(params: { id: string }): Product {
     const { id } = params;
+    const products = this.modelFor('products') as ModelFrom<ProductsRoute>;
 
-    /*
-      Uncomment the next line to render products/error.hbs.
-    */
-    // throw new Error('Some server error.');
+    const product = products.find((product) => product.id === id);
 
-    return this.api.get<Product>(`/products/${id}`);
+    if (!product) {
+      throw new Error(`Could not find the product with ID ${id}.`);
+    }
+
+    return product;
   }
 
-  @action error(error: any /*, transition */) {
-    console.error(error);
-
-    return true;
-
-    // this.router.replaceWith('products');
+  @action error(/* error, transition */) {
+    this.router.replaceWith('products');
   }
 }
 
