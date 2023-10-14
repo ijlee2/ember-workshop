@@ -138,4 +138,28 @@ module('Acceptance | product details', function (hooks) {
       ]);
     });
   });
+
+  module('nest-product-details, v1', function (nestedHooks) {
+    setupExperiments(nestedHooks, {
+      'nest-product-details': 'v1',
+    });
+
+    test('A user cannot visit the product-details route', async function (assert) {
+      await visit('/product-details/1');
+
+      assert.strictEqual(
+        currentURL(),
+        '/products/1',
+        'We redirect the user to the products.product route.',
+      );
+
+      assertProductDetails(assert, {
+        description: 'Made with organic herbs',
+        name: 'Vanilla Ice Cream Cake',
+        price: '$40',
+        rating: '4.5 out of 5 stars',
+        seller: "Amy's",
+      });
+    });
+  });
 });
