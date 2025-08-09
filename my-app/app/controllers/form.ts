@@ -4,6 +4,7 @@ import { dropTask } from 'ember-concurrency';
 
 export default class FormController extends Controller {
   @service declare api: Services['api'];
+  @service declare experiments: Services['experiments'];
 
   submitData = dropTask(
     async (data: Record<string, unknown>): Promise<void> => {
@@ -15,12 +16,24 @@ export default class FormController extends Controller {
   );
 
   get initialData(): Record<string, unknown> {
+    if (this.showSubscribe) {
+      return {
+        email: undefined,
+        message: 'I 🧡 container queries!',
+        name: undefined,
+        subscribe: true,
+      };
+    }
+
     return {
       donation: undefined,
       email: undefined,
       message: 'I 🧡 container queries!',
       name: undefined,
-      subscribe: true,
     };
+  }
+
+  get showSubscribe(): boolean {
+    return this.experiments.getVariant('subscribe-to-ember-times') === 'v1';
   }
 }
