@@ -4,6 +4,7 @@ import { action, get } from '@ember/object';
 import Component from '@glimmer/component';
 import { local } from 'embroider-css-modules';
 
+import { generateErrorMessage } from '../../../utils/components/ui/form.ts';
 import UiFormField from './field.gts';
 import styles from './textarea.module.css';
 
@@ -25,15 +26,11 @@ export default class UiFormTextarea extends Component<UiFormTextareaSignature> {
   get errorMessage(): string | undefined {
     const { isRequired } = this.args;
 
-    if (!isRequired) {
-      return undefined;
-    }
-
-    if (!this.value) {
-      return 'Please provide a value.';
-    }
-
-    return undefined;
+    return generateErrorMessage({
+      isRequired,
+      value: this.value,
+      valueType: 'string',
+    });
   }
 
   get value(): string {
