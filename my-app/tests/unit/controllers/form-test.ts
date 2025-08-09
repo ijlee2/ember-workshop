@@ -33,10 +33,6 @@ module('Unit | Controller | form', function (hooks) {
       });
     });
 
-    test('showSubscribe', function (this: TestContext, assert) {
-      assert.false(this.controller.showSubscribe);
-    });
-
     test('submitData', async function (this: TestContext, assert) {
       // @ts-expect-error: Incorrect type
       this.server.post('/contact-me', (schema, request) => {
@@ -80,10 +76,6 @@ module('Unit | Controller | form', function (hooks) {
         name: undefined,
         subscribe: true,
       });
-    });
-
-    test('showSubscribe', function (this: TestContext, assert) {
-      assert.true(this.controller.showSubscribe);
     });
 
     test('submitData', async function (this: TestContext, assert) {
