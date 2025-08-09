@@ -6,6 +6,15 @@ import QUnit from 'qunit';
 import { setup } from 'qunit-dom';
 import { restore } from 'sinon';
 
+QUnit.config.urlConfig.push({
+  id: 'mirageLogging',
+  label: 'Mirage logging',
+});
+
+export interface ExtendedQUnitConfig extends Config {
+  mirageLogging: boolean;
+}
+
 export function start(): void {
   setApplication(Application.create(config.APP));
 
