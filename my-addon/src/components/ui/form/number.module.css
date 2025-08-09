@@ -1,0 +1,7 @@
+.input {
+  composes: input from "./input.module.css";
+}
+
+.is-disabled {
+  composes: input-disabled from global;
+}
