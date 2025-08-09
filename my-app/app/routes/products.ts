@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { type Registry as Services, service } from '@ember/service';
+import type ProductsController from 'my-app/controllers/products';
 import type { ModelFrom } from 'my-app/utils/routes';
 import type { Product } from 'my-app/utils/routes/products';
 
@@ -26,5 +27,9 @@ export default class ProductsRoute extends Route {
     }
 
     return this.api.get<Product[]>('/products');
+  }
+
+  resetController(controller: ProductsController) {
+    controller.name = null;
   }
 }
