@@ -1,7 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
-import { UiPage } from 'my-addon';
+import { UiForm, UiPage } from 'my-addon';
 
 import type FormController from '../controllers/form';
 import type { Model } from '../routes/form';
@@ -17,6 +17,9 @@ interface FormSignature {
   {{pageTitle (t "routes.form.title")}}
 
   <UiPage @title={{t "routes.form.title"}}>
-    {{outlet}}
+    <UiForm
+      @instructions={{t "routes.form.contact-me-form.instructions"}}
+      @title={{t "routes.form.contact-me-form.title"}}
+    />
   </UiPage>
 </template> satisfies TOC<FormSignature>;
