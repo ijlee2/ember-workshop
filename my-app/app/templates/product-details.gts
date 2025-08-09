@@ -4,6 +4,7 @@ import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiPage } from 'my-addon';
 
+import ProductsProductDetails from '../components/products/product/details';
 import type ProductDetailsController from '../controllers/product-details';
 import type { Model } from '../routes/product-details';
 import styles from './product-details.css';
@@ -16,12 +17,12 @@ interface ProductDetailsSignature {
 }
 
 <template>
-  {{pageTitle @model.id}}
+  {{pageTitle @model.name}}
 
   <UiPage @title={{t "routes.product-details.title"}}>
     <div class={{styles.products}}>
       <div class={{styles.product-details}}>
-        {{@model.id}}
+        <ProductsProductDetails @product={{@model}} />
       </div>
 
       <div class={{styles.actions}}>
