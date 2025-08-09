@@ -1,3 +1,0 @@
-.container {
-  composes: product-details from "./product.module.css";
-}
