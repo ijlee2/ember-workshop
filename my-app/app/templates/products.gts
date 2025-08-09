@@ -5,6 +5,7 @@ import { UiPage } from 'my-addon';
 
 import type ProductsController from '../controllers/products';
 import type { Model } from '../routes/products';
+import styles from './products.css';
 
 interface ProductsSignature {
   Args: {
@@ -17,6 +18,18 @@ interface ProductsSignature {
   {{pageTitle (t "routes.products.title")}}
 
   <UiPage @title={{t "routes.products.title"}}>
-    {{outlet}}
+    <div class={{styles.products-with-details}}>
+      <div class={{styles.filters}}>
+        Filters
+      </div>
+
+      <div class={{styles.list}}>
+        List of products
+      </div>
+
+      <div class={{styles.product-details}}>
+        {{outlet}}
+      </div>
+    </div>
   </UiPage>
 </template> satisfies TOC<ProductsSignature>;
