@@ -7,6 +7,7 @@ import {
 import translationsForEnUs from 'virtual:ember-intl/translations/en-us';
 
 import { type MirageTestContext, setupMirage } from './mirage';
+import { setupExperiments } from './services/experiments';
 
 // This file exists to provide wrappers around ember-qunit's
 // test setup functions. This way, you can easily extend the setup that is
@@ -19,6 +20,7 @@ function setupApplicationTest(hooks: NestedHooks, options?: SetupTestOptions) {
 
   // Additional setup for application tests can be done here.
   setupMirage(hooks);
+  setupExperiments(hooks);
 }
 
 function setupRenderingTest(hooks: NestedHooks, options?: SetupTestOptions) {
@@ -37,4 +39,10 @@ function setupTest(hooks: NestedHooks, options?: SetupTestOptions) {
   // Additional setup for unit tests can be done here.
 }
 
-export { setupApplicationTest, setupMirage, setupRenderingTest, setupTest };
+export {
+  setupApplicationTest,
+  setupExperiments,
+  setupMirage,
+  setupRenderingTest,
+  setupTest,
+};
