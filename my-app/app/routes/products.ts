@@ -1,3 +1,4 @@
+import type Owner from '@ember/owner';
 import Route from '@ember/routing/route';
 import { type Registry as Services, service } from '@ember/service';
 import type ProductsController from 'my-app/controllers/products';
@@ -18,6 +19,13 @@ export default class ProductsRoute extends Route {
   };
 
   @service declare api: Services['api'];
+  @service declare experiments: Services['experiments'];
+
+  constructor(owner: Owner) {
+    super(owner);
+
+    this.experiments.decideVariant('nest-product-details');
+  }
 
   model(params: Params): Promise<Product[]> {
     const { name } = params;
