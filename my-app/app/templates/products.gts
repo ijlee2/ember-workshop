@@ -1,5 +1,6 @@
 import type { TOC } from '@ember/component/template-only';
 import { hash } from '@ember/helper';
+import perform from 'ember-concurrency/helpers/perform';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiFormInput, UiPage } from 'my-addon';
@@ -27,7 +28,7 @@ interface ProductsSignature {
             @data={{hash name=@controller.name}}
             @key="name"
             @label={{t "routes.products.filter-by.name.label"}}
-            @onUpdate={{@controller.updateQueryParameters}}
+            @onUpdate={{perform @controller.updateQueryParameters}}
             @placeholder={{t "routes.products.filter-by.name.placeholder"}}
           />
         </div>

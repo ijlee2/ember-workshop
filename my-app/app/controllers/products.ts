@@ -1,28 +1,29 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
+import { isTesting, macroCondition } from '@embroider/macros';
 import { tracked } from '@glimmer/tracking';
+import { restartableTask, timeout } from 'ember-concurrency';
+
+const TIMEOUT_IN_MILLISECONDS = macroCondition(isTesting()) ? 1 : 300;
 
 export default class ProductsController extends Controller {
   queryParams = ['name'];
 
   @tracked name: string | null = null;
 
-  @action updateQueryParameters({
-    key,
-    value,
-  }: {
-    key: string;
-    value?: string;
-  }): void {
-    if (key !== 'name') {
-      return;
-    }
+  updateQueryParameters = restartableTask(
+    async ({ key, value }: { key: string; value?: string }) => {
+      if (key !== 'name') {
+        return;
+      }
 
-    if (value === undefined || value === '') {
-      this[key] = null;
-      return;
-    }
+      await timeout(TIMEOUT_IN_MILLISECONDS);
 
-    this[key] = value;
-  }
+      if (value === undefined || value === '') {
+        this[key] = null;
+        return;
+      }
+
+      this[key] = value;
+    },
+  );
 }
