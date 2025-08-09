@@ -13,6 +13,7 @@ import UiFormCheckbox from './form/checkbox.gts';
 import UiFormInformation from './form/information.gts';
 import UiFormInput from './form/input.gts';
 import UiFormNumber from './form/number.gts';
+import UiFormSelect from './form/select.gts';
 import UiFormTextarea from './form/textarea.gts';
 
 interface UiFormSignature {
@@ -35,6 +36,10 @@ interface UiFormSignature {
         >;
         Number: WithBoundArgs<
           typeof UiFormNumber,
+          'data' | 'isWide' | 'onUpdate'
+        >;
+        Select: WithBoundArgs<
+          typeof UiFormSelect,
           'data' | 'isWide' | 'onUpdate'
         >;
         Textarea: WithBoundArgs<
@@ -93,6 +98,12 @@ export default class UiFormComponent extends Component<UiFormSignature> {
               )
               Number=(component
                 UiFormNumber
+                data=this.data
+                isWide=CQ.features.wide
+                onUpdate=this.updateData
+              )
+              Select=(component
+                UiFormSelect
                 data=this.data
                 isWide=CQ.features.wide
                 onUpdate=this.updateData

@@ -122,6 +122,7 @@
       "./components/ui/form/information.js": "./dist/_app_/components/ui/form/information.js",
       "./components/ui/form/input.js": "./dist/_app_/components/ui/form/input.js",
       "./components/ui/form/number.js": "./dist/_app_/components/ui/form/number.js",
+      "./components/ui/form/select.js": "./dist/_app_/components/ui/form/select.js",
       "./components/ui/form/textarea.js": "./dist/_app_/components/ui/form/textarea.js",
       "./components/ui/page.js": "./dist/_app_/components/ui/page.js",
       "./modifiers/autofocus.js": "./dist/_app_/modifiers/autofocus.js",

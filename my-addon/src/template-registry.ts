@@ -5,6 +5,7 @@ import type UiFormFieldComponent from './components/ui/form/field.gts';
 import type UiFormInformationComponent from './components/ui/form/information.gts';
 import type UiFormInputComponent from './components/ui/form/input.gts';
 import type UiFormNumberComponent from './components/ui/form/number.gts';
+import type UiFormSelectComponent from './components/ui/form/select.gts';
 import type UiFormTextareaComponent from './components/ui/form/textarea.gts';
 import type UiPageComponent from './components/ui/page.gts';
 import type AutofocusModifier from './modifiers/autofocus.ts';
@@ -17,6 +18,7 @@ export default interface MyAddonRegistry {
   'Ui::Form::Information': typeof UiFormInformationComponent;
   'Ui::Form::Input': typeof UiFormInputComponent;
   'Ui::Form::Number': typeof UiFormNumberComponent;
+  'Ui::Form::Select': typeof UiFormSelectComponent;
   'Ui::Form::Textarea': typeof UiFormTextareaComponent;
   'Ui::Page': typeof UiPageComponent;
   autofocus: typeof AutofocusModifier;
@@ -27,6 +29,7 @@ export default interface MyAddonRegistry {
   'ui/form/information': typeof UiFormInformationComponent;
   'ui/form/input': typeof UiFormInputComponent;
   'ui/form/number': typeof UiFormNumberComponent;
+  'ui/form/select': typeof UiFormSelectComponent;
   'ui/form/textarea': typeof UiFormTextareaComponent;
   'ui/page': typeof UiPageComponent;
 }
