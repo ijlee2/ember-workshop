@@ -10,7 +10,21 @@ export type Model = ModelFrom<ProductDetailsRoute> & {
 
 export default class ProductDetailsRoute extends Route {
   @service declare api: Services['api'];
+  @service declare experiments: Services['experiments'];
   @service declare router: Services['router'];
+
+  get showDetailsOnSamePage() {
+    return this.experiments.getVariant('nest-product-details') === 'v1';
+  }
+
+  beforeModel(transition: any) {
+    const { id } = transition.to.params;
+
+    if (this.showDetailsOnSamePage) {
+      this.router.replaceWith('products.product', id);
+      return;
+    }
+  }
 
   model(params: { id: string }): Promise<Product> {
     const { id } = params;
