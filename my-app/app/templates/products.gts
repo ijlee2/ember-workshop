@@ -3,6 +3,7 @@ import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiPage } from 'my-addon';
 
+import ProductsProductCard from '../components/products/product/card';
 import type ProductsController from '../controllers/products';
 import type { Model } from '../routes/products';
 import styles from './products.css';
@@ -26,9 +27,10 @@ interface ProductsSignature {
       <div class={{styles.list}}>
         {{#each @model as |product|}}
           <div>
-            {{product.id}}
-            -
-            {{product.name}}
+            <ProductsProductCard
+              @product={{product}}
+              @redirectTo="products.product"
+            />
           </div>
         {{else}}
           <p>
