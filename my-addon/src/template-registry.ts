@@ -8,8 +8,10 @@ import type UiFormNumberComponent from './components/ui/form/number.gts';
 import type UiFormSelectComponent from './components/ui/form/select.gts';
 import type UiFormTextareaComponent from './components/ui/form/textarea.gts';
 import type UiPageComponent from './components/ui/page.gts';
+import type AutofocusModifier from './modifiers/autofocus.ts';
 
 export default interface MyAddonRegistry {
+  autofocus: typeof AutofocusModifier;
   'navigation-menu': typeof NavigationMenuComponent;
   NavigationMenu: typeof NavigationMenuComponent;
   'Ui::Form': typeof UiFormComponent;
