@@ -1,6 +1,7 @@
 import type { TOC } from '@ember/component/template-only';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
+import { UiPage } from 'my-addon';
 import type ProductsController from 'my-app/controllers/products';
 import type { Model } from 'my-app/routes/products';
 
@@ -14,13 +15,7 @@ interface ProductsSignature {
 <template>
   {{pageTitle (t "routes.products.title")}}
 
-  <div>
-    <h1>
-      {{t "routes.products.title"}}
-    </h1>
-
-    <div>
-      {{outlet}}
-    </div>
-  </div>
+  <UiPage @title={{t "routes.products.title"}}>
+    {{outlet}}
+  </UiPage>
 </template> satisfies TOC<ProductsSignature>;
