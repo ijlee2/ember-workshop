@@ -11,7 +11,21 @@ export type Model = ModelFrom<ProductsProductRoute> & {
 };
 
 export default class ProductsProductRoute extends Route {
+  @service declare experiments: Services['experiments'];
   @service declare router: Services['router'];
+
+  get showDetailsOnSamePage() {
+    return this.experiments.getVariant('nest-product-details') === 'v1';
+  }
+
+  beforeModel(transition: any) {
+    const { id } = transition.to.params;
+
+    if (!this.showDetailsOnSamePage) {
+      this.router.replaceWith('product-details', id);
+      return;
+    }
+  }
 
   model(params: { id: string }): Product {
     const { id } = params;
