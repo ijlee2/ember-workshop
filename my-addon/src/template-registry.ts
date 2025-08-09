@@ -7,6 +7,7 @@ import type UiFormInputComponent from './components/ui/form/input.gts';
 import type UiFormNumberComponent from './components/ui/form/number.gts';
 import type UiFormTextareaComponent from './components/ui/form/textarea.gts';
 import type UiPageComponent from './components/ui/page.gts';
+import type AutofocusModifier from './modifiers/autofocus.ts';
 
 export default interface MyAddonRegistry {
   NavigationMenu: typeof NavigationMenuComponent;
@@ -18,6 +19,7 @@ export default interface MyAddonRegistry {
   'Ui::Form::Number': typeof UiFormNumberComponent;
   'Ui::Form::Textarea': typeof UiFormTextareaComponent;
   'Ui::Page': typeof UiPageComponent;
+  autofocus: typeof AutofocusModifier;
   'navigation-menu': typeof NavigationMenuComponent;
   'ui/form': typeof UiFormComponent;
   'ui/form/checkbox': typeof UiFormCheckboxComponent;
