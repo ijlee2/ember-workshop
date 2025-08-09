@@ -1,0 +1,13 @@
+.product-details {
+  margin-bottom: 3rem;
+  margin-left: 0;
+  width: 100%;
+}
+
+@media screen and (width >= 40rem) {
+  .product-details {
+    margin-bottom: 0;
+    margin-left: 2rem;
+    width: 25rem;
+  }
+}
