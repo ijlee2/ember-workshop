@@ -5,6 +5,7 @@ import Component from '@glimmer/component';
 import { or } from 'ember-truth-helpers';
 import { local } from 'embroider-css-modules';
 
+import { generateErrorMessage } from '../../../utils/components/ui/form.ts';
 import styles from './checkbox.css';
 import UiFormField from './field.gts';
 
@@ -26,15 +27,11 @@ export default class UiFormCheckboxComponent extends Component<UiFormCheckboxSig
   get errorMessage(): string | undefined {
     const { isRequired } = this.args;
 
-    if (!isRequired) {
-      return undefined;
-    }
-
-    if (!this.isChecked) {
-      return 'Please select the checkbox.';
-    }
-
-    return undefined;
+    return generateErrorMessage({
+      isRequired,
+      value: this.isChecked,
+      valueType: 'boolean',
+    });
   }
 
   get isChecked(): boolean {
