@@ -1,7 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { type Registry as Services, service } from '@ember/service';
 
 export default class FormController extends Controller {
+  @service declare api: Services['api'];
+
   get initialData(): Record<string, unknown> {
     return {
       donation: undefined,
@@ -12,7 +15,10 @@ export default class FormController extends Controller {
     };
   }
 
-  @action submitData(data: Record<string, unknown>): void {
-    console.table(data);
+  @action async submitData(data: Record<string, unknown>): Promise<void> {
+    await this.api.post('/contact-me', {
+      data,
+      type: 'contact-form',
+    });
   }
 }
