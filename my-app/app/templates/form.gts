@@ -61,6 +61,19 @@ interface FormSignature {
           @label={{t "routes.form.contact-me-form.fields.subscribe.label"}}
         />
       </div>
+
+      <div class={{styles.field}}>
+        <F.Input
+          @key="donation"
+          @label={{t "routes.form.contact-me-form.fields.donation.label"}}
+          @minValue={{0}}
+          @placeholder={{t
+            "routes.form.contact-me-form.fields.donation.placeholder"
+          }}
+          @step={{10}}
+          @type="number"
+        />
+      </div>
     </UiForm>
   </UiPage>
 </template> satisfies TOC<FormSignature>;
