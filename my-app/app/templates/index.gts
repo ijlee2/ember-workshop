@@ -1,5 +1,6 @@
 import type { TOC } from '@ember/component/template-only';
 import { t } from 'ember-intl';
+import { UiPage } from 'my-addon';
 
 interface IndexSignature {
   Args: {
@@ -9,15 +10,9 @@ interface IndexSignature {
 }
 
 <template>
-  <div>
-    <h1>
-      {{t "routes.index.title"}}
-    </h1>
-
-    <div>
-      <p>
-        {{t "routes.index.description" htmlSafe=true}}
-      </p>
-    </div>
-  </div>
+  <UiPage @title={{t "routes.index.title"}}>
+    <p>
+      {{t "routes.index.description" htmlSafe=true}}
+    </p>
+  </UiPage>
 </template> satisfies TOC<IndexSignature>;
