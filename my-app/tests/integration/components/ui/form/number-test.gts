@@ -56,6 +56,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isDisabled={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -65,11 +66,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert.dom('[data-test-field]').isDisabled();
   });
 
   test('We can pass @isReadOnly to display the value', async function (this: TestContext, assert) {
@@ -79,6 +76,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isReadOnly={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -88,11 +86,10 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert
+      .dom('[data-test-field]')
+      .hasAttribute('readonly', '')
+      .hasValue('1000');
   });
 
   test('We can pass @isRequired to require a value', async function (this: TestContext, assert) {
@@ -102,6 +99,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isRequired={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -111,11 +109,9 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
+    assert.dom('[data-test-label]').hasText('Donation amount ($) *');
 
-    assert.ok(true);
+    assert.dom('[data-test-field]').isRequired();
   });
 
   test('We can pass @onUpdate to get the updated value', async function (this: TestContext, assert) {
