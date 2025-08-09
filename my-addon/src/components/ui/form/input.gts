@@ -1,3 +1,4 @@
+import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 import { action, get } from '@ember/object';
 import Component from '@glimmer/component';
@@ -16,11 +17,8 @@ interface UiFormInputSignature {
     isWide?: boolean;
     key: string;
     label: string;
-    maxValue?: number;
-    minValue?: number;
     onUpdate: ({ key, value }: { key: string; value: unknown }) => void;
     placeholder?: string;
-    step?: number | 'any';
     type?: string;
   };
 }
@@ -43,6 +41,11 @@ export default class UiFormInput extends Component<UiFormInputSignature> {
   get type(): string {
     const { type } = this.args;
 
+    assert(
+      'To render a number input, please use <Ui::Form::Number> instead.',
+      type !== 'number',
+    );
+
     return type ?? 'text';
   }
 
@@ -53,20 +56,8 @@ export default class UiFormInput extends Component<UiFormInputSignature> {
   }
 
   @action updateValue(event: Event): void {
-    const { key, onUpdate, type } = this.args;
+    const { key, onUpdate } = this.args;
     const { value } = event.target as HTMLInputElement;
-
-    if (type === 'number') {
-      const valueAsNumber = Number.parseFloat(value);
-
-      if (Number.isNaN(valueAsNumber)) {
-        onUpdate({ key, value: undefined });
-        return;
-      }
-
-      onUpdate({ key, value: valueAsNumber });
-      return;
-    }
 
     onUpdate({ key, value });
   }
@@ -95,12 +86,9 @@ export default class UiFormInput extends Component<UiFormInputSignature> {
           data-test-field={{@label}}
           disabled={{@isDisabled}}
           id={{f.inputId}}
-          max={{@maxValue}}
-          min={{@minValue}}
           placeholder={{@placeholder}}
           readonly={{@isReadOnly}}
           required={{@isRequired}}
-          step={{if @step @step "any"}}
           type={{this.type}}
           value={{this.value}}
           {{on "input" this.updateValue}}
