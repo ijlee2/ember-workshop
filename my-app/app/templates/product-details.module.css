@@ -1,0 +1,17 @@
+.products {
+  display: grid;
+  grid-template-areas:
+    "product-details"
+    "actions";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.product-details {
+  grid-area: product-details;
+}
+
+.actions {
+  grid-area: actions;
+  margin-top: 2rem;
+}
