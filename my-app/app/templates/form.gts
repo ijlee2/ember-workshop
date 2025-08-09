@@ -17,7 +17,9 @@ interface FormSignature {
 
   <UiPage @title={{t "routes.form.title"}}>
     <UiForm
+      @data={{@controller.initialData}}
       @instructions={{t "routes.form.contact-me-form.instructions"}}
+      @onSubmit={{@controller.submitData}}
       @title={{t "routes.form.contact-me-form.title"}}
     />
   </UiPage>
