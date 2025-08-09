@@ -1,0 +1,7 @@
+{
+  "name": "test-app",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@my-org-ui/form": "workspace:*"
+  }
+}
