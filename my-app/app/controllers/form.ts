@@ -1,10 +1,13 @@
 import Controller from '@ember/controller';
+import { getOwner } from '@ember/owner';
 import { type Registry as Services, service } from '@ember/service';
 import { dropTask } from 'ember-concurrency';
+import { ContactMe } from 'my-app/utils/controllers/form';
 
 export default class FormController extends Controller {
   @service declare api: Services['api'];
-  @service declare experiments: Services['experiments'];
+
+  contactMe = new ContactMe(getOwner(this)!);
 
   submitData = dropTask(
     async (data: Record<string, unknown>): Promise<void> => {
@@ -16,7 +19,7 @@ export default class FormController extends Controller {
   );
 
   get initialData(): Record<string, unknown> {
-    if (this.showSubscribe) {
+    if (this.contactMe.showSubscribe) {
       return {
         email: undefined,
         message: 'I 🧡 container queries!',
@@ -31,9 +34,5 @@ export default class FormController extends Controller {
       message: 'I 🧡 container queries!',
       name: undefined,
     };
-  }
-
-  get showSubscribe(): boolean {
-    return this.experiments.getVariant('subscribe-to-ember-times') === 'v1';
   }
 }
