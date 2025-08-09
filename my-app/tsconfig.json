@@ -1,0 +1,52 @@
+{
+  "extends": "@ember/app-tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "my-app/tests/*": ["tests/*"],
+      "my-app/*": ["app/*"],
+      "*": ["types/*"]
+    },
+    "plugins": [
+      {
+        "name": "@glint/tsserver-plugin"
+      }
+    ],
+    "types": [
+      "@ember-intl/vite/virtual",
+      "@embroider/core/virtual",
+      "@glint/ember-tsc/types",
+      "ember-source/types",
+      "vite/client"
+    ]
+  },
+  "include": ["app/**/*", "tests/**/*", "types/**/*"],
+  "glint": {
+    "additionalSpecialForms": {
+      "imports": {
+        "ember-truth-helpers": {
+          "and": "&&",
+          "eq": "===",
+          "not": "!",
+          "not-eq": "!==",
+          "or": "||"
+        },
+        "ember-truth-helpers/helpers/and": {
+          "default": "&&"
+        },
+        "ember-truth-helpers/helpers/eq": {
+          "default": "==="
+        },
+        "ember-truth-helpers/helpers/not": {
+          "default": "!"
+        },
+        "ember-truth-helpers/helpers/not-eq": {
+          "default": "!=="
+        },
+        "ember-truth-helpers/helpers/or": {
+          "default": "||"
+        }
+      }
+    }
+  }
+}
