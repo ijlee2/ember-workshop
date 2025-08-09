@@ -1,4 +1,4 @@
-import { set } from '@ember/object';
+import { trackedObject } from '@ember/reactive/collections';
 import {
   fillIn,
   render,
@@ -17,12 +17,12 @@ module('Integration | Component | ui/form/input', function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function (this: TestContext) {
-    this.data = {
+    this.data = trackedObject({
       email: 'zoey@emberjs.com',
       message: 'I 🧡 container queries!',
       name: 'Zoey',
       subscribe: false,
-    };
+    });
 
     this.updateData = (): void => {
       // Do nothing
@@ -135,7 +135,7 @@ module('Integration | Component | ui/form/input', function (hooks) {
 
       assert.strictEqual(value, expectedValue);
 
-      set(data, key, value);
+      data[key] = value;
     };
 
     await render(
