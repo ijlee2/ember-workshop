@@ -2,10 +2,10 @@ import { concat, hash, uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import type { WithBoundArgs } from '@glint/template';
 import { ContainerQuery, width } from 'ember-container-query';
 import { t } from 'ember-intl';
+import { TrackedObject } from 'tracked-built-ins';
 
 import styles from './form.css';
 import UiFormCheckbox from './form/checkbox.gts';
@@ -46,7 +46,7 @@ interface UiFormSignature {
 }
 
 export default class UiFormComponent extends Component<UiFormSignature> {
-  @tracked data: Record<string, unknown> = this.args.data ?? {};
+  data = new TrackedObject<Record<string, unknown>>(this.args.data ?? {});
 
   @action async submitForm(event: SubmitEvent): Promise<void> {
     event.preventDefault();
@@ -55,10 +55,7 @@ export default class UiFormComponent extends Component<UiFormSignature> {
   }
 
   @action updateData({ key, value }: { key: string; value: unknown }): void {
-    this.data = {
-      ...this.data,
-      [key]: value,
-    };
+    this.data[key] = value;
   }
 
   <template>
