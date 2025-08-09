@@ -56,6 +56,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isDisabled={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -65,11 +66,10 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert
+      .dom('[data-test-field]')
+      .hasStyle({ cursor: 'not-allowed' })
+      .isDisabled();
   });
 
   test('We can pass @isReadOnly to display the value', async function (this: TestContext, assert) {
@@ -79,6 +79,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isReadOnly={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -88,11 +89,10 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
-
-    assert.ok(true);
+    assert
+      .dom('[data-test-field]')
+      .hasAttribute('readonly', '')
+      .hasValue('1000');
   });
 
   test('We can pass @isRequired to require a value', async function (this: TestContext, assert) {
@@ -102,6 +102,7 @@ module('Integration | Component | ui/form/number', function (hooks) {
       <template>
         <UiFormNumber
           @data={{parent.data}}
+          @isRequired={{true}}
           @key="donation"
           @label="Donation amount ($)"
           @minValue={{0}}
@@ -111,11 +112,9 @@ module('Integration | Component | ui/form/number', function (hooks) {
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
+    assert.dom('[data-test-label]').hasText('Donation amount ($) *');
 
-    assert.ok(true);
+    assert.dom('[data-test-field]').isRequired();
   });
 
   test('We can pass @maxValue, @minValue, and @step to limit values', async function (this: TestContext, assert) {
@@ -127,18 +126,38 @@ module('Integration | Component | ui/form/number', function (hooks) {
           @data={{parent.data}}
           @key="donation"
           @label="Donation amount ($)"
+          @maxValue={{500}}
           @minValue={{0}}
           @onUpdate={{parent.updateData}}
           @placeholder="100"
+          @step={{10}}
         />
       </template>,
     );
 
-    /*
-      TODO: Write tests
-    */
+    await fillIn('[data-test-field]', '0');
 
-    assert.ok(true);
+    assert.dom('[data-test-field]').hasValue('0');
+
+    assert.strictEqual(parent.data['donation'], 0);
+
+    await fillIn('[data-test-field]', '5');
+
+    assert.dom('[data-test-field]').hasValue('');
+
+    assert.strictEqual(parent.data['donation'], undefined);
+
+    await fillIn('[data-test-field]', '10');
+
+    assert.dom('[data-test-field]').hasValue('10');
+
+    assert.strictEqual(parent.data['donation'], 10);
+
+    await fillIn('[data-test-field]', '1000');
+
+    assert.dom('[data-test-field]').hasValue('');
+
+    assert.strictEqual(parent.data['donation'], undefined);
   });
 
   test('We can pass @onUpdate to get the updated value', async function (this: TestContext, assert) {
