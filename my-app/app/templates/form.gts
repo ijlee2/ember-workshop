@@ -56,7 +56,7 @@ interface FormSignature {
         />
       </div>
 
-      {{#if @controller.showSubscribe}}
+      {{#if @controller.contactMe.showSubscribe}}
         <div class={{styles.field}}>
           <F.Checkbox
             @key="subscribe"
