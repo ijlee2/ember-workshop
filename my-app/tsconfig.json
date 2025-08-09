@@ -20,7 +20,7 @@
       "@ember-intl/vite/virtual"
     ]
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"],
+  "include": ["app/**/*", "mirage/**/*", "tests/**/*", "types/**/*"],
   "glint": {
     "additionalSpecialForms": {
       "imports": {
