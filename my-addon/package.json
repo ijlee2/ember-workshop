@@ -127,6 +127,7 @@
       "./components/ui/form/select.js": "./dist/_app_/components/ui/form/select.js",
       "./components/ui/form/textarea.js": "./dist/_app_/components/ui/form/textarea.js",
       "./components/ui/page.js": "./dist/_app_/components/ui/page.js",
+      "./modifiers/autofocus.js": "./dist/_app_/modifiers/autofocus.js",
       "./utils/components/ui/form.js": "./dist/_app_/utils/components/ui/form.js"
     },
     "main": "addon-main.cjs",

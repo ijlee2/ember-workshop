@@ -7,6 +7,7 @@ import { ContainerQuery, width } from 'ember-container-query';
 import { t } from 'ember-intl';
 import { TrackedObject } from 'tracked-built-ins';
 
+import autofocus from '../../modifiers/autofocus.ts';
 import styles from './form.module.css';
 import UiFormCheckbox from './form/checkbox.gts';
 import UiFormInformation from './form/information.gts';
@@ -70,6 +71,7 @@ export default class UiForm extends Component<UiFormSignature> {
         aria-labelledby={{if @title (concat formId "-title")}}
         class={{styles.form}}
         data-test-form={{if @title @title ""}}
+        {{autofocus}}
         {{on "submit" this.submitForm}}
       >
         <UiFormInformation
