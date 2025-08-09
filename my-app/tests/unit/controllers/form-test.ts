@@ -26,20 +26,19 @@ module('Unit | Controller | form', function (hooks) {
     });
 
     test('initialData', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+      assert.deepEqual(this.controller.initialData, {
+        donation: undefined,
+        email: undefined,
+        message: 'I 🧡 container queries!',
+        name: undefined,
+      });
     });
 
     test('showSubscribe', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+      assert.false(this.controller.showSubscribe);
     });
 
-    test('submitData', function (this: TestContext, assert) {
+    test('submitData', async function (this: TestContext, assert) {
       // @ts-expect-error: Incorrect type
       this.server.post('/contact-me', (schema, request) => {
         assert.step('POST /contact-me');
@@ -59,10 +58,14 @@ module('Unit | Controller | form', function (hooks) {
         });
       });
 
-      /*
-        TODO: Write tests
-      */
-      assert.verifySteps([]);
+      await this.controller.submitData.perform({
+        donation: 0,
+        email: '',
+        message: 'I 🧡 container queries!',
+        name: undefined,
+      });
+
+      assert.verifySteps(['POST /contact-me']);
     });
   });
 
@@ -72,20 +75,19 @@ module('Unit | Controller | form', function (hooks) {
     });
 
     test('initialData', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+      assert.deepEqual(this.controller.initialData, {
+        email: undefined,
+        message: 'I 🧡 container queries!',
+        name: undefined,
+        subscribe: true,
+      });
     });
 
     test('showSubscribe', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+      assert.true(this.controller.showSubscribe);
     });
 
-    test('submitData', function (this: TestContext, assert) {
+    test('submitData', async function (this: TestContext, assert) {
       // @ts-expect-error: Incorrect type
       this.server.post('/contact-me', (schema, request) => {
         assert.step('POST /contact-me');
@@ -105,10 +107,14 @@ module('Unit | Controller | form', function (hooks) {
         });
       });
 
-      /*
-        TODO: Write tests
-      */
-      assert.verifySteps([]);
+      await this.controller.submitData.perform({
+        email: '',
+        message: 'I 🧡 container queries!',
+        name: undefined,
+        subscribe: false,
+      });
+
+      assert.verifySteps(['POST /contact-me']);
     });
   });
 });
