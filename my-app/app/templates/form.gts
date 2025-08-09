@@ -56,24 +56,26 @@ interface FormSignature {
         />
       </div>
 
-      <div class={{styles.field}}>
-        <F.Checkbox
-          @key="subscribe"
-          @label={{t "routes.form.contact-me-form.fields.subscribe.label"}}
-        />
-      </div>
-
-      <div class={{styles.field}}>
-        <F.Number
-          @key="donation"
-          @label={{t "routes.form.contact-me-form.fields.donation.label"}}
-          @minValue={{0}}
-          @placeholder={{t
-            "routes.form.contact-me-form.fields.donation.placeholder"
-          }}
-          @step={{10}}
-        />
-      </div>
+      {{#if @controller.showSubscribe}}
+        <div class={{styles.field}}>
+          <F.Checkbox
+            @key="subscribe"
+            @label={{t "routes.form.contact-me-form.fields.subscribe.label"}}
+          />
+        </div>
+      {{else}}
+        <div class={{styles.field}}>
+          <F.Number
+            @key="donation"
+            @label={{t "routes.form.contact-me-form.fields.donation.label"}}
+            @minValue={{0}}
+            @placeholder={{t
+              "routes.form.contact-me-form.fields.donation.placeholder"
+            }}
+            @step={{10}}
+          />
+        </div>
+      {{/if}}
     </UiForm>
   </UiPage>
 </template> satisfies TOC<FormSignature>;
