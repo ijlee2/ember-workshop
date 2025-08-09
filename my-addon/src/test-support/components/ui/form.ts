@@ -1,20 +1,17 @@
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { trackedObject } from '@ember/reactive/collections';
 
 export class UiForm {
-  @tracked data: Record<string, unknown> = {
+  data = trackedObject<Record<string, unknown>>({
     donation: 1000,
     email: 'zoey@emberjs.com',
     message: 'I 🧡 container queries!',
     name: 'Zoey',
     sortBy: 'name:asc',
     subscribe: true,
-  };
+  });
 
   @action updateData({ key, value }: { key: string; value: unknown }): void {
-    this.data = {
-      ...this.data,
-      [key]: value,
-    };
+    this.data[key] = value;
   }
 }
