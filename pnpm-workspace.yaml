@@ -1,0 +1,24 @@
+allowBuilds:
+  unrs-resolver: false
+
+autoInstallPeers: false
+
+minimumReleaseAge: 720
+
+minimumReleaseAgeExclude:
+  - "@codemod-utils/*"
+  - "@ijlee2-frontend-configs/*"
+
+packages:
+  - "blueprints/v2-addon"
+  - "my-addon"
+  - "my-app"
+
+publicHoistPattern:
+  - "*eslint*"
+  - "*prettier*"
+  - "*stylelint*"
+
+resolvePeersFromWorkspaceRoot: false
+
+verifyDepsBeforeRun: "warn"

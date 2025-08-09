@@ -1,0 +1,62 @@
+{
+  "name": "blueprints-v2-addon",
+  "version": "4.1.1",
+  "private": true,
+  "description": "Blueprints for v2 addons",
+  "keywords": [
+    "codemod",
+    "ember-codemod",
+    "emberjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ijlee2/ember-workshop.git"
+  },
+  "license": "MIT",
+  "author": "Isaac J. Lee",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": "dist/bin/blueprints-v2-addon.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "sh build.sh --production",
+    "format": "prettier . --cache --write",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" && pnpm format",
+    "lint:format": "prettier . --cache --check",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:types": "tsc --noEmit",
+    "prepare": "pnpm build",
+    "test": "sh build.sh --test && mt dist-for-testing --quiet",
+    "update-blueprints": "./update-blueprints.mjs",
+    "update-test-fixtures": "./update-test-fixtures.sh"
+  },
+  "dependencies": {
+    "@codemod-utils/ast-javascript": "^4.3.2",
+    "@codemod-utils/blueprints": "^3.2.0",
+    "@codemod-utils/ember": "^4.2.0",
+    "@codemod-utils/files": "^4.1.0",
+    "@codemod-utils/package-json": "^4.1.0",
+    "yargs": "^18.1.0"
+  },
+  "devDependencies": {
+    "@codemod-utils/tests": "^3.2.0",
+    "@ijlee2-frontend-configs/eslint-config-node": "^4.2.3",
+    "@ijlee2-frontend-configs/prettier": "^3.3.4",
+    "@tsconfig/node22": "^22.0.6",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/node": "^22.20.1",
+    "@types/yargs": "^17.0.35",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.9.1",
+    "git-diff-apply": "^7.0.5",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": "22.* || >= 24"
+  }
+}
