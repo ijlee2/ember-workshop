@@ -63,7 +63,7 @@ interface FormSignature {
       </div>
 
       <div class={{styles.field}}>
-        <F.Input
+        <F.Number
           @key="donation"
           @label={{t "routes.form.contact-me-form.fields.donation.label"}}
           @minValue={{0}}
@@ -71,7 +71,6 @@ interface FormSignature {
             "routes.form.contact-me-form.fields.donation.placeholder"
           }}
           @step={{10}}
-          @type="number"
         />
       </div>
     </UiForm>
