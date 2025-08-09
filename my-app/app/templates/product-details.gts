@@ -3,6 +3,7 @@ import { LinkTo } from '@ember/routing';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiPage } from 'my-addon';
+import ProductsProductDetails from 'my-app/components/products/product/details';
 import type ProductDetailsController from 'my-app/controllers/product-details';
 import type { Model } from 'my-app/routes/product-details';
 
@@ -16,12 +17,12 @@ interface ProductDetailsSignature {
 }
 
 <template>
-  {{pageTitle @model.id}}
+  {{pageTitle @model.name}}
 
   <UiPage @title={{t "routes.product-details.title"}}>
     <div class={{styles.products}}>
       <div class={{styles.product-details}}>
-        {{@model.id}}
+        <ProductsProductDetails @product={{@model}} />
       </div>
 
       <div class={{styles.actions}}>
