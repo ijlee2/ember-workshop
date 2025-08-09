@@ -96,9 +96,23 @@ module('Acceptance | form', function (hooks) {
 
       assert.strictEqual(currentURL(), '/form');
 
-      /*
-        TODO: Write tests
-      */
+      assert.dom('[data-test-field="Name"]').hasNoValue();
+
+      assert.dom('[data-test-field="Email"]').hasNoValue();
+
+      assert
+        .dom('[data-test-field="Message"]')
+        .hasValue('I 🧡 container queries!');
+
+      assert
+        .dom('[data-test-field="Subscribe to The Ember Times?"]')
+        .hasAria('checked', 'true');
+
+      assert.dom('[data-test-field="Donation amount ($)"]').doesNotExist();
+
+      assert.dom('[data-test-error-message]').exists({ count: 2 });
+
+      assert.dom('[data-test-button="Submit"]').isEnabled();
     });
 
     test('We can submit the contact me form', async function (this: TestContext, assert) {
@@ -124,11 +138,16 @@ module('Acceptance | form', function (hooks) {
 
       await visit('/form');
 
-      /*
-        TODO: Write tests
-      */
+      await fillIn('[data-test-field="Name"]', 'Zoey');
+      await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
+      await fillIn('[data-test-field="Message"]', 'Gude!');
+      await click('[data-test-field="Subscribe to The Ember Times?"]');
 
-      assert.verifySteps([]);
+      assert.dom('[data-test-error-message]').doesNotExist();
+
+      await click('[data-test-button="Submit"]');
+
+      assert.verifySteps(['POST /contact-me']);
     });
   });
 });
