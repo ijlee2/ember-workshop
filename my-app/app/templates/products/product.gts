@@ -13,9 +13,9 @@ interface ProductsProductSignature {
 }
 
 <template>
-  {{pageTitle @model.id}}
+  {{pageTitle @model.name}}
 
   <div class={{styles.product-details}}>
-    {{@model.id}}
+    {{@model.name}}
   </div>
 </template> satisfies TOC<ProductsProductSignature>;
