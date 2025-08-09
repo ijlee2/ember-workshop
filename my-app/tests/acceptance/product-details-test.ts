@@ -9,7 +9,7 @@ import {
   setupExperiments,
 } from 'my-app/tests/helpers';
 import { seedProducts } from 'my-app/tests/helpers/mirage/seeds';
-import { module, skip } from 'qunit';
+import { module, test } from 'qunit';
 
 interface TestContext extends ApplicationTestContext {}
 
@@ -25,7 +25,7 @@ module('Acceptance | product-details', function (hooks) {
       'nest-product-details': 'control',
     });
 
-    skip('Accessibility audit', async function (assert) {
+    test('Accessibility audit', async function (assert) {
       await visit('/product-details/1');
       await a11yAudit();
 
@@ -35,7 +35,7 @@ module('Acceptance | product-details', function (hooks) {
       );
     });
 
-    skip('We can visit the page', async function (assert) {
+    test('We can visit the page', async function (assert) {
       await visit('/product-details/1');
 
       assert.strictEqual(currentURL(), '/product-details/1');
@@ -49,7 +49,7 @@ module('Acceptance | product-details', function (hooks) {
       });
     });
 
-    skip('We can check the details of another product', async function (assert) {
+    test('We can check the details of another product', async function (assert) {
       await visit('/product-details/1');
       await click('[data-test-link="Back"]');
 
@@ -76,7 +76,7 @@ module('Acceptance | product-details', function (hooks) {
       });
     });
 
-    skip('When we check a product that does not exist, we are redirected to the products route', async function (assert) {
+    test('When we check a product that does not exist, we are redirected to the products route', async function (assert) {
       await visit('/product-details/not-a-valid-id');
 
       assert.strictEqual(currentURL(), '/products');
