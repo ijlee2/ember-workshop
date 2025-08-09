@@ -1,1 +1,9 @@
-export default interface MyAddonRegistry {}
+import type NavigationMenuComponent from './components/navigation-menu.gts';
+import type UiPageComponent from './components/ui/page.gts';
+
+export default interface MyAddonRegistry {
+  NavigationMenu: typeof NavigationMenuComponent;
+  'Ui::Page': typeof UiPageComponent;
+  'navigation-menu': typeof NavigationMenuComponent;
+  'ui/page': typeof UiPageComponent;
+}
