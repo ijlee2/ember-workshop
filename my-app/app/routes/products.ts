@@ -17,6 +17,9 @@ export default class ProductsRoute extends Route {
     name: {
       refreshModel: true,
     },
+    sortBy: {
+      refreshModel: false,
+    },
   };
 
   @service declare api: Services['api'];
@@ -40,5 +43,6 @@ export default class ProductsRoute extends Route {
 
   resetController(controller: ProductsController) {
     controller.name = null;
+    controller.sortBy = null;
   }
 }
