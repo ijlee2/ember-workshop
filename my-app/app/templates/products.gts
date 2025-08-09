@@ -19,7 +19,7 @@ interface ProductsSignature {
   {{pageTitle (t "routes.products.title")}}
 
   <UiPage @title={{t "routes.products.title"}}>
-    <div class={{styles.products-with-details}}>
+    <div class={{styles.products}}>
       <div class={{styles.filters}}>
         Filters
       </div>
@@ -29,7 +29,7 @@ interface ProductsSignature {
           <div>
             <ProductsProductCard
               @product={{product}}
-              @redirectTo="products.product"
+              @redirectTo="product-details"
             />
           </div>
         {{else}}
