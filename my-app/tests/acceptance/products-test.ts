@@ -16,7 +16,7 @@ import {
   setupExperiments,
 } from 'my-app/tests/helpers';
 import { seedProducts } from 'my-app/tests/helpers/mirage/seeds';
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 
 interface TestContext extends ApplicationTestContext {}
 
@@ -39,7 +39,7 @@ module('Acceptance | products', function (hooks) {
       'nest-product-details': 'control',
     });
 
-    skip('We can visit the page', async function (assert) {
+    test('We can visit the page', async function (assert) {
       await visit('/products');
 
       assert.strictEqual(currentURL(), '/products');
@@ -65,7 +65,7 @@ module('Acceptance | products', function (hooks) {
         .hasText('Black Forest Cake');
     });
 
-    skip('We can filter and sort products', async function (assert) {
+    test('We can filter and sort products', async function (assert) {
       await visit('/products');
       await fillIn('[data-test-field="Filter by name"]', 'cake');
 
@@ -140,7 +140,7 @@ module('Acceptance | products', function (hooks) {
         .hasText('Black Forest Cake');
     });
 
-    skip('We can check the details of a product', async function (assert) {
+    test('We can check the details of a product', async function (assert) {
       await visit('/products');
 
       let products = findAll('[data-test-product-card]');
@@ -188,7 +188,7 @@ module('Acceptance | products', function (hooks) {
       'nest-product-details': 'v1',
     });
 
-    skip('We can visit the page', async function (assert) {
+    test('We can visit the page', async function (assert) {
       await visit('/products');
 
       assert.strictEqual(currentURL(), '/products');
@@ -204,7 +204,7 @@ module('Acceptance | products', function (hooks) {
       ]);
     });
 
-    skip('We can filter and sort products', async function (assert) {
+    test('We can filter and sort products', async function (assert) {
       await visit('/products');
       await fillIn('[data-test-field="Filter by name"]', 'cake');
 
@@ -237,7 +237,7 @@ module('Acceptance | products', function (hooks) {
       ]);
     });
 
-    skip('We can check the details of a product', async function (assert) {
+    test('We can check the details of a product', async function (assert) {
       await visit('/products');
 
       const products = findAll('[data-test-product-card]');

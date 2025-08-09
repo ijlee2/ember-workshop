@@ -6,7 +6,7 @@ import {
   setupExperiments,
 } from 'my-app/tests/helpers';
 import { seedProducts } from 'my-app/tests/helpers/mirage/seeds';
-import { module, skip } from 'qunit';
+import { module, test } from 'qunit';
 
 interface TestContext extends ApplicationTestContext {}
 
@@ -22,7 +22,7 @@ module('Acceptance | products/product', function (hooks) {
       'nest-product-details': 'control',
     });
 
-    skip('We cannot visit the page', async function (assert) {
+    test('We cannot visit the page', async function (assert) {
       await visit('/products/1');
 
       assert.strictEqual(
