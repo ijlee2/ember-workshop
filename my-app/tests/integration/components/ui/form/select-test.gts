@@ -1,13 +1,12 @@
 import {
   click,
   render,
-  select,
   type TestContext as BaseTestContext,
 } from '@ember/test-helpers';
 import { setupIntl } from 'ember-intl/test-support';
 import { UiFormSelect } from 'my-addon';
 import { UiForm } from 'my-addon/test-support';
-import { setupRenderingTest } from 'my-app/tests/helpers';
+import { selectByLabel, setupRenderingTest } from 'my-app/tests/helpers';
 import { module, test } from 'qunit';
 
 type Option = {
@@ -191,7 +190,7 @@ module('Integration | Component | ui/form/select', function (hooks) {
       </template>,
     );
 
-    await select('[data-test-field]', 'price:desc');
+    await selectByLabel('[data-test-field]', 'Price: High to Low');
 
     assert.dom('[data-test-field]').hasValue('price:desc');
 
