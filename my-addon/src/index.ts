@@ -8,3 +8,4 @@ export { default as UiFormNumber } from './components/ui/form/number.gts';
 export { default as UiFormSelect } from './components/ui/form/select.ts';
 export { default as UiFormTextarea } from './components/ui/form/textarea.gts';
 export { default as UiPage } from './components/ui/page.gts';
+export { default as autofocus } from './modifiers/autofocus.ts';
