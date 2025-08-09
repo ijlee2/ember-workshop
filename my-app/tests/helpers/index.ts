@@ -44,3 +44,6 @@ export {
   setupRenderingTest,
   setupTest,
 };
+
+export * from './routes/form';
+export * from './routes/products';
