@@ -19,25 +19,40 @@ module('Unit | Controller | products', function (hooks) {
   });
 
   module('updateQueryParameters', function () {
-    test('updates query parameters', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+    test('updates query parameters', async function (this: TestContext, assert) {
+      await this.controller.updateQueryParameters.perform({
+        key: 'name',
+        value: 'fresh',
+      });
+
+      assert.strictEqual(this.controller.name, 'fresh');
+      assert.strictEqual(this.controller.sortBy, null);
+
+      await this.controller.updateQueryParameters.perform({
+        key: 'sortBy',
+        value: 'price:asc',
+      });
+
+      assert.strictEqual(this.controller.name, 'fresh');
+      assert.strictEqual(this.controller.sortBy, 'price:asc');
     });
 
-    test('casts undefined to null', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+    test('casts undefined to null', async function (this: TestContext, assert) {
+      await this.controller.updateQueryParameters.perform({
+        key: 'sortBy',
+        value: undefined,
+      });
+
+      assert.strictEqual(this.controller.sortBy, null);
     });
 
-    test('casts the empty string to null', function (this: TestContext, assert) {
-      /*
-        TODO: Write tests
-      */
-      assert.ok(true);
+    test('casts the empty string to null', async function (this: TestContext, assert) {
+      await this.controller.updateQueryParameters.perform({
+        key: 'name',
+        value: '',
+      });
+
+      assert.strictEqual(this.controller.name, null);
     });
   });
 });
