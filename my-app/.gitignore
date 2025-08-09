@@ -1,0 +1,13 @@
+# compiled output
+/dist/
+/tmp/
+
+# dependencies
+/node_modules/
+
+# misc
+/.env*
+/.pnp*
+/.eslintcache
+/.stylelintcache
+/testem.log

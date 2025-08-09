@@ -1,0 +1,26 @@
+{
+  "extends": "@ijlee2-frontend-configs/typescript/ember-addon",
+  "compilerOptions": {
+    "declarationDir": "declarations",
+    "exactOptionalPropertyTypes": false,
+    "plugins": [
+      {
+        "name": "@glint/tsserver-plugin"
+      }
+    ],
+    "rootDir": ".",
+    "types": ["@glint/ember-tsc/types", "ember-source/types"]
+  },
+  "include": ["src/**/*", "unpublished-development-types/**/*", "*.mts"],
+  "glint": {
+    "additionalSpecialForms": {
+      "globals": {
+        "and": "&&",
+        "eq": "===",
+        "not": "!",
+        "neq": "!==",
+        "or": "||"
+      }
+    }
+  }
+}

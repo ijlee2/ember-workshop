@@ -1,0 +1,10 @@
+# compiled output
+/declarations/
+/dist/
+
+# misc
+!.*
+.*/
+
+# specific to this package
+*.css.d.ts

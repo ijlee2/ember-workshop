@@ -1,0 +1,35 @@
+allowBuilds:
+  unrs-resolver: false
+
+autoDedupe: true
+
+autoInstallPeers: false
+
+lockfile:
+  includeResolutionSettings: true
+
+minimumReleaseAge: 720
+
+minimumReleaseAgeExclude:
+  - "@codemod-utils/*"
+  - "@ember-intl/*"
+  - "@ijlee2-frontend-configs/*"
+  - "ember-intl"
+  - "ember-testem"
+
+overrides:
+  "testem": "^4.0.0-beta.1" # Due to ember-cli
+
+packages:
+  - "blueprints/v2-addon"
+  - "my-addon"
+  - "my-app"
+
+publicHoistPattern:
+  - "*eslint*"
+  - "*prettier*"
+  - "*stylelint*"
+
+resolvePeersFromWorkspaceRoot: false
+
+verifyDepsBeforeRun: "warn"
