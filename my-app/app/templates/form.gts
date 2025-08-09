@@ -1,4 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
+import perform from 'ember-concurrency/helpers/perform';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiForm, UiPage } from 'my-addon';
@@ -21,7 +22,7 @@ interface FormSignature {
     <UiForm
       @data={{@controller.initialData}}
       @instructions={{t "routes.form.contact-me-form.instructions"}}
-      @onSubmit={{@controller.submitData}}
+      @onSubmit={{perform @controller.submitData}}
       @title={{t "routes.form.contact-me-form.title"}}
       as |F|
     >
