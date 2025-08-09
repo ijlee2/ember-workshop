@@ -24,7 +24,17 @@ interface ProductsSignature {
       </div>
 
       <div class={{styles.list}}>
-        List of products
+        {{#each @model as |product|}}
+          <div>
+            {{product.id}}
+            -
+            {{product.name}}
+          </div>
+        {{else}}
+          <p>
+            {{t "routes.products.no-products-found"}}
+          </p>
+        {{/each}}
       </div>
 
       <div class={{styles.product-details}}>
