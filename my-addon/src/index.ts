@@ -5,7 +5,7 @@ export { default as UiFormField } from './components/ui/form/field.gts';
 export { default as UiFormInformation } from './components/ui/form/information.gts';
 export { default as UiFormInput } from './components/ui/form/input.gts';
 export { default as UiFormNumber } from './components/ui/form/number.gts';
-export { default as UiFormSelect } from './components/ui/form/select.ts';
+export { default as UiFormSelect } from './components/ui/form/select.gts';
 export { default as UiFormTextarea } from './components/ui/form/textarea.gts';
 export { default as UiPage } from './components/ui/page.gts';
 export { default as autofocus } from './modifiers/autofocus.ts';
