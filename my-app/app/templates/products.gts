@@ -1,9 +1,10 @@
 import type { TOC } from '@ember/component/template-only';
 import { hash } from '@ember/helper';
+import { sortBy } from '@nullvoxpopuli/ember-composable-helpers';
 import perform from 'ember-concurrency/helpers/perform';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
-import { UiFormInput, UiPage } from 'my-addon';
+import { UiFormInput, UiFormSelect, UiPage } from 'my-addon';
 import ProductsProductCard from 'my-app/components/products/product/card';
 import type ProductsController from 'my-app/controllers/products';
 import experiment from 'my-app/helpers/experiment';
@@ -39,10 +40,23 @@ interface ProductsSignature {
             @placeholder={{t "routes.products.filter-by.name.placeholder"}}
           />
         </div>
+
+        <div class={{styles.filter}}>
+          <UiFormSelect
+            @data={{hash sortBy=@controller.sortBy}}
+            @key="sortBy"
+            @label={{t "routes.products.sort-by.label"}}
+            @onUpdate={{perform @controller.updateQueryParameters}}
+            @options={{@controller.options}}
+          />
+        </div>
       </div>
 
       <div class={{styles.list}}>
-        {{#each @model as |product|}}
+        {{#each
+          (sortBy (if @controller.sortBy @controller.sortBy "") @model)
+          as |product|
+        }}
           <div>
             <ProductsProductCard
               @product={{product}}
