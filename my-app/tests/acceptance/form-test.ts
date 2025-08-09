@@ -7,7 +7,7 @@ import {
   setupApplicationTest,
   setupExperiments,
 } from 'my-app/tests/helpers';
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 
 interface TestContext extends ApplicationTestContext {}
 
@@ -26,7 +26,7 @@ module('Acceptance | form', function (hooks) {
       'subscribe-to-ember-times': 'control',
     });
 
-    skip('We can visit the page', async function (assert) {
+    test('We can visit the page', async function (assert) {
       await visit('/form');
 
       assert.strictEqual(currentURL(), '/form');
@@ -50,7 +50,7 @@ module('Acceptance | form', function (hooks) {
       assert.dom('[data-test-button="Submit"]').isEnabled();
     });
 
-    skip('We can submit the contact me form', async function (this: TestContext, assert) {
+    test('We can submit the contact me form', async function (this: TestContext, assert) {
       this.server.post('/contact-me', (schema, request) => {
         assert.step('POST /contact-me');
 
@@ -91,7 +91,7 @@ module('Acceptance | form', function (hooks) {
       'subscribe-to-ember-times': 'v1',
     });
 
-    skip('We can visit the page', async function (assert) {
+    test('We can visit the page', async function (assert) {
       await visit('/form');
 
       assert.strictEqual(currentURL(), '/form');
@@ -101,7 +101,7 @@ module('Acceptance | form', function (hooks) {
       */
     });
 
-    skip('We can submit the contact me form', async function (this: TestContext, assert) {
+    test('We can submit the contact me form', async function (this: TestContext, assert) {
       this.server.post('/contact-me', (schema, request) => {
         assert.step('POST /contact-me');
 
