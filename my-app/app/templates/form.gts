@@ -20,9 +20,9 @@ interface FormSignature {
 
   <UiPage @title={{t "routes.form.title"}}>
     <UiForm
-      @data={{@controller.initialData}}
+      @data={{@controller.contactMe.initialData}}
       @instructions={{t "routes.form.contact-me-form.instructions"}}
-      @onSubmit={{perform @controller.submitData}}
+      @onSubmit={{perform @controller.contactMe.submitData}}
       @title={{t "routes.form.contact-me-form.title"}}
       as |F|
     >
