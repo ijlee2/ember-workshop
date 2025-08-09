@@ -1,7 +1,8 @@
 import type { TOC } from '@ember/component/template-only';
+import { hash } from '@ember/helper';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
-import { UiPage } from 'my-addon';
+import { UiFormInput, UiPage } from 'my-addon';
 import ProductsProductCard from 'my-app/components/products/product/card';
 import type ProductsController from 'my-app/controllers/products';
 import type { Model } from 'my-app/routes/products';
@@ -21,7 +22,15 @@ interface ProductsSignature {
   <UiPage @title={{t "routes.products.title"}}>
     <div class={{styles.products}}>
       <div class={{styles.filters}}>
-        Filters
+        <div class={{styles.filter}}>
+          <UiFormInput
+            @data={{hash name=@controller.name}}
+            @key="name"
+            @label={{t "routes.products.filter-by.name.label"}}
+            @onUpdate={{@controller.updateQueryParameters}}
+            @placeholder={{t "routes.products.filter-by.name.placeholder"}}
+          />
+        </div>
       </div>
 
       <div class={{styles.list}}>
