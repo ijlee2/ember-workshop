@@ -1,8 +1,8 @@
 import { concat, hash, uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { trackedObject } from '@ember/reactive/collections';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import type { WithBoundArgs } from '@glint/template';
 import { ContainerQuery, width } from 'ember-container-query';
 import { t } from 'ember-intl';
@@ -51,7 +51,7 @@ interface UiFormSignature {
 }
 
 export default class UiForm extends Component<UiFormSignature> {
-  @tracked data: Record<string, unknown> = this.args.data ?? {};
+  data = trackedObject<Record<string, unknown>>(this.args.data ?? {});
 
   @action async submitForm(event: SubmitEvent): Promise<void> {
     event.preventDefault();
@@ -60,10 +60,7 @@ export default class UiForm extends Component<UiFormSignature> {
   }
 
   @action updateData({ key, value }: { key: string; value: unknown }): void {
-    this.data = {
-      ...this.data,
-      [key]: value,
-    };
+    this.data[key] = value;
   }
 
   <template>
