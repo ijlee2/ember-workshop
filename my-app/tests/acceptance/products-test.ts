@@ -1,17 +1,11 @@
-import {
-  click,
-  currentURL,
-  fillIn,
-  findAll,
-  select,
-  visit,
-} from '@ember/test-helpers';
+import { click, currentURL, fillIn, findAll, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import {
   type ApplicationTestContext,
   assertProductDetails,
   assertProducts,
+  selectByLabel,
   setupApplicationTest,
   setupExperiments,
 } from 'my-app/tests/helpers';
@@ -78,21 +72,11 @@ module('Acceptance | products', function (hooks) {
 
       assert.dom('[data-test-field="Sort by"]').exists();
 
-      const products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Vanilla Ice Cream Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Mug');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake');
+      assertProducts(assert, [
+        'Vanilla Ice Cream Cake',
+        'Ember.js Mug',
+        'Black Forest Cake',
+      ]);
     });
 
     test('We can filter and sort products', async function (assert) {
@@ -101,115 +85,61 @@ module('Acceptance | products', function (hooks) {
 
       assert.strictEqual(currentURL(), '/products?name=cake');
 
-      let products = findAll('[data-test-product-card]');
+      assertProducts(assert, ['Vanilla Ice Cream Cake', 'Black Forest Cake']);
 
-      assert.strictEqual(products.length, 2);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Vanilla Ice Cream Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Black Forest Cake');
-
-      await select('[data-test-field="Sort by"]', 'name:asc');
+      await selectByLabel('[data-test-field="Sort by"]', 'Name: A to Z');
 
       assert.strictEqual(currentURL(), '/products?name=cake&sortBy=name%3Aasc');
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 2);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Black Forest Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Vanilla Ice Cream Cake');
+      assertProducts(assert, ['Black Forest Cake', 'Vanilla Ice Cream Cake']);
 
       await fillIn('[data-test-field="Filter by name"]', '');
 
       assert.strictEqual(currentURL(), '/products?sortBy=name%3Aasc');
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Black Forest Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Mug');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Vanilla Ice Cream Cake');
+      assertProducts(assert, [
+        'Black Forest Cake',
+        'Ember.js Mug',
+        'Vanilla Ice Cream Cake',
+      ]);
 
       await click('[data-test-button="Clear"]');
 
       assert.strictEqual(currentURL(), '/products');
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Vanilla Ice Cream Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Mug');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake');
+      assertProducts(assert, [
+        'Vanilla Ice Cream Cake',
+        'Ember.js Mug',
+        'Black Forest Cake',
+      ]);
     });
 
     test('We can check the details of a product', async function (assert) {
       await visit('/products');
 
-      let products = findAll('[data-test-product-card]');
+      const products = findAll('[data-test-product-card]');
 
       await click(products[0]!.querySelector('[data-test-link="Learn More"]')!);
 
       assert.strictEqual(currentURL(), '/product-details/1');
 
-      assert.dom('[data-test-field="Name"]').hasText('Vanilla Ice Cream Cake');
-
-      assert
-        .dom('[data-test-field="Description"]')
-        .hasText('Made with organic herbs');
-
-      assert.dom('[data-test-field="Price"]').hasText('$40');
-
-      assert.dom('[data-test-field="Rating"]').hasText('4.5 out of 5 stars');
-
-      assert.dom('[data-test-field="Seller"]').hasText("Amy's");
+      assertProductDetails(assert, {
+        description: 'Made with organic herbs',
+        name: 'Vanilla Ice Cream Cake',
+        price: '$40',
+        rating: '4.5 out of 5 stars',
+        seller: "Amy's",
+      });
 
       await click('[data-test-link="Back"]');
 
       assert.strictEqual(currentURL(), '/products');
 
-      products = findAll('[data-test-product-card]');
-
-      assert.strictEqual(products.length, 3);
-
-      assert
-        .dom('[data-test-field="Name"]', products[0])
-        .hasText('Vanilla Ice Cream Cake');
-
-      assert
-        .dom('[data-test-field="Name"]', products[1])
-        .hasText('Ember.js Mug');
-
-      assert
-        .dom('[data-test-field="Name"]', products[2])
-        .hasText('Black Forest Cake');
+      assertProducts(assert, [
+        'Vanilla Ice Cream Cake',
+        'Ember.js Mug',
+        'Black Forest Cake',
+      ]);
     });
   });
 
@@ -242,7 +172,7 @@ module('Acceptance | products', function (hooks) {
 
       assertProducts(assert, ['Vanilla Ice Cream Cake', 'Black Forest Cake']);
 
-      await select('[data-test-field="Sort by"]', 'name:asc');
+      await selectByLabel('[data-test-field="Sort by"]', 'Name: A to Z');
 
       assert.strictEqual(currentURL(), '/products?name=cake&sortBy=name%3Aasc');
 
