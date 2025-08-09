@@ -13,7 +13,7 @@ import UiFormCheckbox from './form/checkbox.gts';
 import UiFormInformation from './form/information.gts';
 import UiFormInput from './form/input.gts';
 import UiFormNumber from './form/number.gts';
-import UiFormSelect from './form/select.ts';
+import UiFormSelect from './form/select.gts';
 import UiFormTextarea from './form/textarea.gts';
 
 interface UiFormSignature {
