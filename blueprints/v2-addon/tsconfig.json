@@ -1,0 +1,14 @@
+{
+  "extends": ["@tsconfig/node22/tsconfig", "@tsconfig/strictest/tsconfig"],
+  "compilerOptions": {
+    "declaration": false,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "dist-for-testing",
+    "target": "esnext",
+    "types": ["@types/node", "@types/yargs"],
+    "verbatimModuleSyntax": true
+  },
+  "include": ["bin", "src", "tests"],
+  "exclude": ["src/blueprints", "tests/fixtures"]
+}
