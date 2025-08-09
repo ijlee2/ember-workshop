@@ -1,0 +1,123 @@
+{
+  "name": "my-addon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An Ember addon to illustrate core concepts in Ember (v6)",
+  "keywords": [
+    "emberjs",
+    "ember-addon",
+    "embroider"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ijlee2/ember-workshop.git"
+  },
+  "license": "MIT",
+  "author": "Isaac J. Lee",
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  },
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist",
+    "translations"
+  ],
+  "scripts": {
+    "build": "concurrently \"pnpm:build:*\" --names \"build:\"",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
+    "format": "prettier . --cache --write",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:css": "stylelint \"**/*.css\" --cache",
+    "lint:css:fix": "stylelint \"**/*.css\" --fix",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" && pnpm format",
+    "lint:format": "prettier . --cache --check",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "prelint:types": "type-css-modules --src src",
+    "lint:types": "glint",
+    "prepack": "rollup --config",
+    "start": "concurrently \"pnpm:start:*\" --names \"start:\"",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo \"A v2 addon does not have tests, run tests in my-app\""
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.10.0",
+    "decorator-transforms": "^2.3.0",
+    "ember-container-query": "^6.0.2",
+    "ember-modifier": "^4.2.2",
+    "ember-truth-helpers": "^4.0.3",
+    "embroider-css-modules": "^3.0.1",
+    "tracked-built-ins": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-transform-typescript": "^7.28.0",
+    "@babel/runtime": "^7.28.2",
+    "@embroider/addon-dev": "^8.1.0",
+    "@glimmer/component": "^2.0.0",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.5.2",
+    "@glint/environment-ember-loose": "^1.5.2",
+    "@glint/environment-ember-template-imports": "^1.5.2",
+    "@glint/template": "^1.5.2",
+    "@ijlee2-frontend-configs/ember-template-lint": "^2.2.0",
+    "@ijlee2-frontend-configs/eslint-config-ember": "^2.1.1",
+    "@ijlee2-frontend-configs/prettier": "^2.1.1",
+    "@ijlee2-frontend-configs/stylelint": "^2.1.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@tsconfig/ember": "^3.0.11",
+    "babel-plugin-ember-template-compilation": "^3.0.0",
+    "concurrently": "^9.2.0",
+    "ember-intl": "^7.3.1",
+    "ember-source": "~6.6.0",
+    "ember-template-lint": "^7.9.2",
+    "eslint": "^9.33.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "rollup": "^4.46.2",
+    "rollup-plugin-postcss": "^4.0.2",
+    "stylelint": "^16.23.1",
+    "type-css-modules": "^2.0.2",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "ember-intl": "^7.3.1"
+  },
+  "engines": {
+    "node": "20.* || >= 22"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "app-js": {},
+    "main": "addon-main.cjs",
+    "public-assets": {},
+    "type": "addon",
+    "version": 2
+  }
+}
