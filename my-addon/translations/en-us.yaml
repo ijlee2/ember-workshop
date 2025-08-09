@@ -1,0 +1,9 @@
+components:
+  ui:
+    form:
+      select:
+        clear:
+          aria-label: "Clear option for {label}"
+          label: ✕
+        default-option: -- Please select an option. --
+      submit: Submit
