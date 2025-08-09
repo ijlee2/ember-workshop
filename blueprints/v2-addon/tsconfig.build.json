@@ -1,0 +1,12 @@
+{
+  "extends": ["@tsconfig/node20/tsconfig", "@tsconfig/strictest/tsconfig"],
+  "compilerOptions": {
+    "declaration": false,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "dist",
+    "verbatimModuleSyntax": true
+  },
+  "include": ["bin", "src"],
+  "exclude": ["src/blueprints"]
+}
