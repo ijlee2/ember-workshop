@@ -1,9 +1,11 @@
-import { click, currentURL, fillIn, visit } from '@ember/test-helpers';
+import { click, currentURL, visit } from '@ember/test-helpers';
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
 import { Response } from 'miragejs';
 import {
   type ApplicationTestContext,
+  assertContactMeForm,
+  fillContactMeForm,
   setupApplicationTest,
   setupExperiments,
 } from 'my-app/tests/helpers';
@@ -31,19 +33,12 @@ module('Acceptance | form', function (hooks) {
 
       assert.strictEqual(currentURL(), '/form');
 
-      assert.dom('[data-test-field="Name"]').hasNoValue();
-
-      assert.dom('[data-test-field="Email"]').hasNoValue();
-
-      assert
-        .dom('[data-test-field="Message"]')
-        .hasValue('I 🧡 container queries!');
-
-      assert
-        .dom('[data-test-field="Subscribe to The Ember Times?"]')
-        .doesNotExist();
-
-      assert.dom('[data-test-field="Donation amount ($)"]').hasNoValue('');
+      assertContactMeForm(assert, {
+        donation: '',
+        email: '',
+        message: 'I 🧡 container queries!',
+        name: '',
+      });
 
       assert.dom('[data-test-error-message]').exists({ count: 2 });
 
@@ -73,10 +68,12 @@ module('Acceptance | form', function (hooks) {
 
       await visit('/form');
 
-      await fillIn('[data-test-field="Name"]', 'Zoey');
-      await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
-      await fillIn('[data-test-field="Message"]', 'Gude!');
-      await fillIn('[data-test-field="Donation amount ($)"]', '10000');
+      await fillContactMeForm({
+        donation: '10000',
+        email: 'zoey@emberjs.com',
+        message: 'Gude!',
+        name: 'Zoey',
+      });
 
       assert.dom('[data-test-error-message]').doesNotExist();
 
@@ -96,19 +93,12 @@ module('Acceptance | form', function (hooks) {
 
       assert.strictEqual(currentURL(), '/form');
 
-      assert.dom('[data-test-field="Name"]').hasNoValue();
-
-      assert.dom('[data-test-field="Email"]').hasNoValue();
-
-      assert
-        .dom('[data-test-field="Message"]')
-        .hasValue('I 🧡 container queries!');
-
-      assert
-        .dom('[data-test-field="Subscribe to The Ember Times?"]')
-        .hasAria('checked', 'true');
-
-      assert.dom('[data-test-field="Donation amount ($)"]').doesNotExist();
+      assertContactMeForm(assert, {
+        email: '',
+        message: 'I 🧡 container queries!',
+        name: '',
+        subscribe: true,
+      });
 
       assert.dom('[data-test-error-message]').exists({ count: 2 });
 
@@ -138,10 +128,12 @@ module('Acceptance | form', function (hooks) {
 
       await visit('/form');
 
-      await fillIn('[data-test-field="Name"]', 'Zoey');
-      await fillIn('[data-test-field="Email"]', 'zoey@emberjs.com');
-      await fillIn('[data-test-field="Message"]', 'Gude!');
-      await click('[data-test-field="Subscribe to The Ember Times?"]');
+      await fillContactMeForm({
+        email: 'zoey@emberjs.com',
+        message: 'Gude!',
+        name: 'Zoey',
+        subscribe: false,
+      });
 
       assert.dom('[data-test-error-message]').doesNotExist();
 
