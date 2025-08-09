@@ -2,6 +2,7 @@ import type { TOC } from '@ember/component/template-only';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
 import { UiPage } from 'my-addon';
+import ProductsProductCard from 'my-app/components/products/product/card';
 import type ProductsController from 'my-app/controllers/products';
 import type { Model } from 'my-app/routes/products';
 
@@ -26,9 +27,10 @@ interface ProductsSignature {
       <div class={{styles.list}}>
         {{#each @model as |product|}}
           <div>
-            {{product.id}}
-            -
-            {{product.name}}
+            <ProductsProductCard
+              @product={{product}}
+              @redirectTo="products.product"
+            />
           </div>
         {{else}}
           <p>
