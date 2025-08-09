@@ -6,6 +6,7 @@ import { pageTitle } from 'ember-page-title';
 import { UiFormInput, UiPage } from 'my-addon';
 import ProductsProductCard from 'my-app/components/products/product/card';
 import type ProductsController from 'my-app/controllers/products';
+import experiment from 'my-app/helpers/experiment';
 import type { Model } from 'my-app/routes/products';
 
 import styles from './products.module.css';
@@ -21,7 +22,13 @@ interface ProductsSignature {
   {{pageTitle (t "routes.products.title")}}
 
   <UiPage @title={{t "routes.products.title"}}>
-    <div class={{styles.products}}>
+    <div
+      class={{if
+        (experiment name="nest-product-details" variant="v1")
+        styles.products-with-details
+        styles.products
+      }}
+    >
       <div class={{styles.filters}}>
         <div class={{styles.filter}}>
           <UiFormInput
@@ -39,7 +46,11 @@ interface ProductsSignature {
           <div>
             <ProductsProductCard
               @product={{product}}
-              @redirectTo="product-details"
+              @redirectTo={{if
+                (experiment name="nest-product-details" variant="v1")
+                "products.product"
+                "product-details"
+              }}
             />
           </div>
         {{else}}
