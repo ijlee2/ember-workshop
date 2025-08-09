@@ -45,5 +45,6 @@ export {
   setupTest,
 };
 
+export * from './components/ui/form';
 export * from './routes/form';
 export * from './routes/products';
