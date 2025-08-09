@@ -1,0 +1,46 @@
+{
+  "extends": "@tsconfig/ember/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "my-app/tests/*": ["tests/*"],
+      "my-app/*": ["app/*"],
+      "*": ["types/*"]
+    },
+    "plugins": [
+      {
+        "name": "@glint/tsserver-plugin"
+      }
+    ],
+    "types": ["ember-source/types", "@glint/ember-tsc/types"]
+  },
+  "include": ["app/**/*", "mirage/**/*", "tests/**/*", "types/**/*"],
+  "glint": {
+    "additionalSpecialForms": {
+      "imports": {
+        "ember-truth-helpers": {
+          "and": "&&",
+          "eq": "===",
+          "not": "!",
+          "not-eq": "!==",
+          "or": "||"
+        },
+        "ember-truth-helpers/helpers/and": {
+          "default": "&&"
+        },
+        "ember-truth-helpers/helpers/eq": {
+          "default": "==="
+        },
+        "ember-truth-helpers/helpers/not": {
+          "default": "!"
+        },
+        "ember-truth-helpers/helpers/not-eq": {
+          "default": "!=="
+        },
+        "ember-truth-helpers/helpers/or": {
+          "default": "||"
+        }
+      }
+    }
+  }
+}
