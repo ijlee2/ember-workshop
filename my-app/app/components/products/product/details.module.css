@@ -1,0 +1,45 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "image-container"
+    "body"
+    "actions";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.header {
+  grid-area: header;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.image-container {
+  grid-area: image-container;
+  margin-top: 0.5rem;
+  max-height: 18rem;
+  max-width: 24rem;
+}
+
+.body {
+  grid-area: body;
+  margin-top: 1rem;
+}
+
+.field {
+  margin-top: 1rem;
+}
+
+.field:first-of-type {
+  margin-top: 0;
+}
+
+.actions {
+  grid-area: actions;
+  margin-top: 1rem;
+}
