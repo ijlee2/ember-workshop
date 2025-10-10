@@ -1,0 +1,4 @@
+packages:
+  - blueprints/v2-addon
+  - my-addon
+  - my-app
