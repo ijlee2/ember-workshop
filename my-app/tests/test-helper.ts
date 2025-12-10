@@ -1,19 +1,19 @@
 import { setApplication } from '@ember/test-helpers';
-import { setupEmberOnerrorValidation, start } from 'ember-qunit';
-import { loadTests } from 'ember-qunit/test-loader';
+import { setupEmberOnerrorValidation, start as qunitStart } from 'ember-qunit';
 import Application from 'my-app/app';
 import config from 'my-app/config/environment';
 import QUnit from 'qunit';
 import { setup } from 'qunit-dom';
 import { restore } from 'sinon';
 
-setApplication(Application.create(config.APP));
+export function start() {
+  setApplication(Application.create(config.APP));
 
-setup(QUnit.assert);
-setupEmberOnerrorValidation();
-loadTests();
-start();
+  setup(QUnit.assert);
+  setupEmberOnerrorValidation();
+  qunitStart();
 
-QUnit.testDone(function () {
-  restore();
-});
+  QUnit.testDone(function () {
+    restore();
+  });
+}

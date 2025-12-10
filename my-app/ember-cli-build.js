@@ -1,14 +1,15 @@
 'use strict';
 
 const { compatBuild } = require('@embroider/compat');
-const { Webpack } = require('@embroider/webpack');
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 function isProduction() {
   return EmberApp.env() === 'production';
 }
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
+  const { buildOnce } = await import('@embroider/vite');
+
   const app = new EmberApp(defaults, {
     // Add options here
     babel: {
@@ -65,18 +66,9 @@ module.exports = function (defaults) {
         },
       },
     },
-    skipBabel: [
-      {
-        package: 'qunit',
-      },
-    ],
     splitAtRoutes: ['form', 'product-details', 'products'],
-    staticAddonTestSupportTrees: true,
-    staticAddonTrees: true,
     staticAppPaths: ['mirage'],
-    staticEmberSource: true,
-    staticInvokables: true,
   };
 
-  return compatBuild(app, Webpack, options);
+  return compatBuild(app, buildOnce, options);
 };
