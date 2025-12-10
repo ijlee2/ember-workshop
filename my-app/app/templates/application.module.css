@@ -53,3 +53,8 @@
 .copyright a {
   color: rgb(128 191 255 / 90%);
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+button:global(.sourceLens_panel-action_S4usA) {
+  color: #333 !important;
+}

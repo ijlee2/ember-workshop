@@ -4,6 +4,7 @@ const {
   babelCompatSupport,
   templateCompatSupport,
 } = require('@embroider/compat/babel');
+const { sourceLens } = require('ember-source-lens/babel');
 
 module.exports = {
   generatorOpts: {
@@ -27,7 +28,7 @@ module.exports = {
           'ember-cli-htmlbars-inline-precompile',
           'htmlbars-inline-precompile',
         ],
-        transforms: [...templateCompatSupport()],
+        transforms: [...templateCompatSupport(), sourceLens.template()],
       },
     ],
     [
@@ -47,5 +48,6 @@ module.exports = {
       },
     ],
     ...babelCompatSupport(),
+    sourceLens(),
   ],
 };

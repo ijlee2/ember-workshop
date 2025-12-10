@@ -94,6 +94,7 @@
     "ember-qunit": "^9.0.4",
     "ember-resolver": "^13.1.1",
     "ember-source": "~6.8.2",
+    "ember-source-lens": "^0.0.8",
     "ember-template-lint": "^7.9.3",
     "ember-test-selectors": "^7.1.0",
     "ember-truth-helpers": "^5.0.0",

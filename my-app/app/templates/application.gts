@@ -3,6 +3,7 @@ import { array, hash } from '@ember/helper';
 import { NavigationNarrator } from 'ember-a11y-refocus';
 import { t } from 'ember-intl';
 import { pageTitle } from 'ember-page-title';
+import { SourceLens } from 'ember-source-lens';
 import { NavigationMenu } from 'my-addon';
 
 import styles from './application.module.css';
@@ -56,4 +57,9 @@ interface ApplicationSignature {
       </span>
     </footer>
   </div>
+
+  <SourceLens
+    @editor="vscode"
+    @projectRoot=".."
+  />
 </template> satisfies TOC<ApplicationSignature>;
