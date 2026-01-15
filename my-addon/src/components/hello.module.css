@@ -1,0 +1,20 @@
+.container {
+  color: orange;
+  font-style: italic;
+}
+
+.hide {
+  animation: fade-out 0s ease-in 0s forwards;
+}
+
+.hide.after-3-sec {
+  animation-delay: 3s;
+}
+
+@keyframes fade-out {
+  to {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+}
