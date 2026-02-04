@@ -1,3 +1,4 @@
+export { default as Hello } from './components/hello.ts';
 export { default as NavigationMenu } from './components/navigation-menu.gts';
 export { default as UiForm } from './components/ui/form.gts';
 export { default as UiFormCheckbox } from './components/ui/form/checkbox.gts';

@@ -115,6 +115,7 @@
   },
   "ember-addon": {
     "app-js": {
+      "./components/hello.js": "./dist/_app_/components/hello.js",
       "./components/navigation-menu.js": "./dist/_app_/components/navigation-menu.js",
       "./components/ui/form.js": "./dist/_app_/components/ui/form.js",
       "./components/ui/form/checkbox.js": "./dist/_app_/components/ui/form/checkbox.js",
