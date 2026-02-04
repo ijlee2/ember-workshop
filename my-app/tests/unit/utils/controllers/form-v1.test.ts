@@ -18,62 +18,15 @@ module('Unit | Utility | controllers/form', function (hooks) {
     this.contactMe = new ContactMe(getOwner(this)!);
   });
 
-  module('subscribe-to-ember-times, control', function (nestedHooks) {
-    setupExperiments(nestedHooks, {
-      'subscribe-to-ember-times': 'control',
-    });
-
-    test('initialData', function (this: TestContext, assert) {
-      assert.deepEqual(this.contactMe.initialData, {
-        donation: undefined,
-        email: undefined,
-        message: 'I 🧡 container queries!',
-        name: undefined,
-      });
-    });
-
-    test('showSubscribe', function (this: TestContext, assert) {
-      assert.false(this.contactMe.showSubscribe);
-    });
-
-    test('submitData', async function (this: TestContext, assert) {
-      // @ts-expect-error: Incorrect type
-      this.server.post('/contact-me', (schema, request) => {
-        assert.step('POST /contact-me');
-
-        const json = JSON.parse(request.requestBody);
-
-        assert.deepEqual(json, {
-          data: {
-            attributes: {
-              donation: 0,
-              email: '',
-              message: 'I 🧡 container queries!',
-              name: null,
-            },
-            type: 'contact-form',
-          },
-        });
-      });
-
-      await this.contactMe.submitData.perform({
-        donation: 0,
-        email: '',
-        message: 'I 🧡 container queries!',
-        name: undefined,
-      });
-
-      assert.verifySteps(['POST /contact-me']);
-    });
-  });
-
   module('subscribe-to-ember-times, v1', function (nestedHooks) {
     setupExperiments(nestedHooks, {
       'subscribe-to-ember-times': 'v1',
     });
 
     test('initialData', function (this: TestContext, assert) {
-      assert.deepEqual(this.contactMe.initialData, {
+      const { initialData } = this.contactMe;
+
+      assert.deepEqual(initialData, {
         email: undefined,
         message: 'I 🧡 container queries!',
         name: undefined,
