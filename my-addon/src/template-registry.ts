@@ -1,3 +1,4 @@
+import type HelloComponent from './components/hello.ts';
 import type NavigationMenuComponent from './components/navigation-menu.gts';
 import type UiFormComponent from './components/ui/form.gts';
 import type UiFormCheckboxComponent from './components/ui/form/checkbox.gts';
@@ -12,6 +13,8 @@ import type AutofocusModifier from './modifiers/autofocus.ts';
 
 export default interface MyAddonRegistry {
   autofocus: typeof AutofocusModifier;
+  hello: typeof HelloComponent;
+  Hello: typeof HelloComponent;
   'navigation-menu': typeof NavigationMenuComponent;
   NavigationMenu: typeof NavigationMenuComponent;
   'Ui::Form': typeof UiFormComponent;
