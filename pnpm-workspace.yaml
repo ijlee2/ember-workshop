@@ -13,6 +13,7 @@ minimumReleaseAgeExclude:
 
 packages:
   - "blueprints/v2-addon"
+  - "ember-test"
   - "my-addon"
   - "my-app"
 

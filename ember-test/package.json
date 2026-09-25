@@ -1,0 +1,54 @@
+{
+  "name": "ember-test",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "keywords": [
+    "codemod",
+    "ember-codemod",
+    "emberjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ijlee2/ember-workshop.git"
+  },
+  "license": "MIT",
+  "author": "Isaac J. Lee",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": "dist/bin/ember-test.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "sh build.sh --production",
+    "format": "prettier . --cache --write",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" && pnpm format",
+    "lint:format": "prettier . --cache --check",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:types": "tsc --noEmit",
+    "prepare": "pnpm build",
+    "test": "sh build.sh --test && mt dist-for-testing --quiet",
+    "update-test-fixtures": "./update-test-fixtures.sh"
+  },
+  "dependencies": {
+    "yargs": "^18.2.0"
+  },
+  "devDependencies": {
+    "@codemod-utils/tests": "^3.3.0",
+    "@ijlee2-frontend-configs/eslint-config-node": "^4.3.0",
+    "@ijlee2-frontend-configs/prettier": "^3.4.0",
+    "@ijlee2-frontend-configs/typescript": "^4.1.0",
+    "@types/node": "^22.20.4",
+    "@types/yargs": "^17.0.35",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.8",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": "22.* || >= 24"
+  }
+}
