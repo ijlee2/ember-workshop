@@ -33,4 +33,4 @@ const codemodOptions: CodemodOptions = {
   testPort: argv['test-port'],
 };
 
-run(codemodOptions);
+void run(codemodOptions);

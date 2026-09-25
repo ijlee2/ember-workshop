@@ -1,3 +1,10 @@
 import type { Options } from '../types/index.js';
+import { runTestsInCI } from './run-tests/run-tests-in-ci.js';
 
-export function runTests(options: Options): void {}
+export async function runTests(options: Options): Promise<void> {
+  try {
+    await runTestsInCI(options);
+  } catch (error) {
+    console.error((error as Error).message);
+  }
+}

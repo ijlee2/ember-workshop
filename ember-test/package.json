@@ -34,6 +34,7 @@
     "update-test-fixtures": "./update-test-fixtures.sh"
   },
   "dependencies": {
+    "testem": "^3.21.0",
     "yargs": "^18.2.0"
   },
   "devDependencies": {
