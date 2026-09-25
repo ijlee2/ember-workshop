@@ -6,3 +6,5 @@ export async function run(codemodOptions: CodemodOptions): Promise<void> {
   await runTests(options);
   cleanUp(options);
 }
+
+export { emberTest } from './ember-test.js';

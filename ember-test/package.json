@@ -48,7 +48,8 @@
     "concurrently": "^10.0.5",
     "eslint": "^10.11.0",
     "prettier": "^3.9.8",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite": "^8.3.0"
   },
   "engines": {
     "node": "22.* || >= 24"

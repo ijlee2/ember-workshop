@@ -37,7 +37,8 @@
     "lint:types": "ember-tsc --noEmit",
     "start": "vite",
     "test": "pnpm build:test && ember-test --path dist",
-    "test:watch": "concurrently \"pnpm build:test --watch\" \"ember-test --path dist --server\" --names build,test"
+    "test:watch": "concurrently \"pnpm build:test --watch\" \"ember-test --path dist --server\" --names build,test",
+    "test:watch-vite": "NODE_ENV=development vite build --mode development --watch"
   },
   "devDependencies": {
     "@babel/core": "^8.0.6",
