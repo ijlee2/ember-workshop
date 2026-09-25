@@ -1,5 +1,5 @@
 type CodemodOptions = {
-  path: string | undefined;
+  path: string;
   projectRoot: string;
   testPort: number | undefined;
   server: boolean | undefined;

@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 import { watch } from 'chokidar';
 import Testem from 'testem';
 
@@ -16,10 +18,10 @@ export async function runTestsInDev(options: Options): Promise<void> {
   testemInstance.setDefaultOptions({
     ...startOptions,
     config_dir: projectRoot,
-    cwd: buildPath,
+    cwd: join(projectRoot, buildPath),
   });
 
-  const watcher = watch(['dist'], {
+  const watcher = watch([buildPath], {
     awaitWriteFinish: true,
     usePolling: true,
   });

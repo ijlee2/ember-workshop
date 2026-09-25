@@ -33,7 +33,7 @@ const argv = yargs(hideBin(process.argv))
   .parseSync();
 
 const codemodOptions: CodemodOptions = {
-  path: argv['path'],
+  path: argv['path'] ?? 'dist',
   projectRoot: argv['root'] ?? process.cwd(),
   testPort: argv['test-port'],
   server: argv['server'],

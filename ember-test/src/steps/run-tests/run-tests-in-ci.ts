@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 import Testem from 'testem';
 
 import type { Options } from '../../types/index.js';
@@ -15,7 +17,7 @@ export async function runTestsInCI(options: Options): Promise<void> {
   testemInstance.setDefaultOptions({
     ...startOptions,
     config_dir: projectRoot,
-    cwd: buildPath,
+    cwd: join(projectRoot, buildPath),
     parallel: 1,
   });
 
