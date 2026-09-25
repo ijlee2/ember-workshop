@@ -34,6 +34,7 @@
     "update-test-fixtures": "./update-test-fixtures.sh"
   },
   "dependencies": {
+    "chokidar": "^5.0.0",
     "testem": "^3.21.0",
     "yargs": "^18.2.0"
   },

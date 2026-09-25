@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path';
 import type { CodemodOptions, Options } from '../types/index.js';
 
 export function createOptions(codemodOptions: CodemodOptions): Options {
-  const { path, projectRoot, testPort } = codemodOptions;
+  const { path, projectRoot, testPort, server } = codemodOptions;
 
   const buildPath = path
     ? resolve(path)
@@ -13,6 +13,7 @@ export function createOptions(codemodOptions: CodemodOptions): Options {
 
   return {
     buildPath,
+    launchBrowser: Boolean(server),
     projectRoot,
     testPort,
   };

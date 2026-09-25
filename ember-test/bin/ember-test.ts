@@ -25,12 +25,18 @@ const argv = yargs(hideBin(process.argv))
       'Port for running tests. Pass 0 to automatically pick an available port.',
     type: 'number',
   })
+  .option('server', {
+    alias: 's',
+    describe: 'Launch test browser',
+    type: 'boolean',
+  })
   .parseSync();
 
 const codemodOptions: CodemodOptions = {
   path: argv['path'],
   projectRoot: argv['root'] ?? process.cwd(),
   testPort: argv['test-port'],
+  server: argv['server'],
 };
 
 void run(codemodOptions);
