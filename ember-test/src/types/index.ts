@@ -1,4 +1,8 @@
 type CodemodOptions = {
+  filters: {
+    filter: string | undefined;
+    module: string | undefined;
+  };
   path: string;
   projectRoot: string;
   testPort: number | undefined;
@@ -7,6 +11,10 @@ type CodemodOptions = {
 
 type Options = {
   buildPath: string;
+  filters: {
+    filter: string | undefined;
+    module: string | undefined;
+  };
   launchBrowser: boolean;
   projectRoot: string;
   testPort: number | undefined;

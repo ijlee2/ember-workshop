@@ -3,9 +3,10 @@ import { join } from 'node:path';
 import Testem from 'testem';
 
 import type { Options } from '../../types/index.js';
+import { getQueryParams } from '../../utils/run-tests/get-query-params.js';
 
 export async function runTestsInCI(options: Options): Promise<void> {
-  const { buildPath, projectRoot, testPort } = options;
+  const { buildPath, filters, projectRoot, testPort } = options;
 
   const testemInstance = new Testem();
 
@@ -19,6 +20,7 @@ export async function runTestsInCI(options: Options): Promise<void> {
     config_dir: projectRoot,
     cwd: join(projectRoot, buildPath),
     parallel: 1,
+    query_params: getQueryParams(filters),
   });
 
   return new Promise((resolve, reject) => {

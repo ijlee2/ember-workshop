@@ -12,6 +12,16 @@ process.title = 'ember-test';
 
 // Set codemod options
 const argv = yargs(hideBin(process.argv))
+  .option('filter', {
+    alias: 'f',
+    describe: 'Specify a keyword for which modules and tests to run',
+    type: 'string',
+  })
+  .option('module', {
+    alias: 'm',
+    describe: 'Specify the name of a module to run',
+    type: 'string',
+  })
   .option('path', {
     describe: 'Relative path to the test build',
     type: 'string',
@@ -33,6 +43,10 @@ const argv = yargs(hideBin(process.argv))
   .parseSync();
 
 const codemodOptions: CodemodOptions = {
+  filters: {
+    filter: argv['filter'],
+    module: argv['module'],
+  },
   path: argv['path'] ?? 'dist',
   projectRoot: argv['root'] ?? process.cwd(),
   testPort: argv['test-port'],

@@ -4,9 +4,10 @@ import { watch } from 'chokidar';
 import Testem from 'testem';
 
 import type { Options } from '../../types/index.js';
+import { getQueryParams } from '../../utils/run-tests/get-query-params.js';
 
 export async function runTestsInDev(options: Options): Promise<void> {
-  const { buildPath, projectRoot, testPort } = options;
+  const { buildPath, filters, projectRoot, testPort } = options;
 
   const testemInstance = new Testem();
 
@@ -19,6 +20,7 @@ export async function runTestsInDev(options: Options): Promise<void> {
     ...startOptions,
     config_dir: projectRoot,
     cwd: join(projectRoot, buildPath),
+    query_params: getQueryParams(filters),
   });
 
   const watcher = watch([buildPath], {
