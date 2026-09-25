@@ -12,14 +12,25 @@ process.title = 'ember-test';
 
 // Set codemod options
 const argv = yargs(hideBin(process.argv))
+  .option('path', {
+    describe: 'Relative path to the test build',
+    type: 'string',
+  })
   .option('root', {
     describe: 'Where to run the codemod',
     type: 'string',
   })
+  .option('test-port', {
+    describe:
+      'Port for running tests. Pass 0 to automatically pick an available port.',
+    type: 'number',
+  })
   .parseSync();
 
 const codemodOptions: CodemodOptions = {
+  path: argv['path'],
   projectRoot: argv['root'] ?? process.cwd(),
+  testPort: argv['test-port'],
 };
 
 run(codemodOptions);
